@@ -1,0 +1,44 @@
+const PRIMARY_LIGHT = '#FFA8A9';
+const PRIMARY = '#F95759';
+const PRIMARY_DARK = '#D03F40';
+const SECONDARY = '#D0E2D0';
+const SECONDARY_LIGHT = '#8ECF91';
+const SECONDARY_DARK = '#50A050';
+const TERIARY = '#3FCBCE';
+const TERIARY_LIGHT = '#80EDEA';
+const TERIARY_DARK = '#209E9E';
+
+const GREY_LIGHT_1 = '#F7F7F7';
+const GREY_LIGHT_2 = '#EEE';
+const GREY_LIGHT_3 = '#CCC';
+const GREY_LIGHT_4 = '#BBB';
+
+const GREY_DARK_1 = '#999';
+const GREY_DARK_2 = '#777';
+const GREY_DARK_3 = '#333';
+const GREY_DARK_4 = '#222';
+
+const WHITE = '#FFF';
+const BLACK = '#000';
+
+export default {
+  PRIMARY,
+  PRIMARY_LIGHT,
+  PRIMARY_DARK,
+  SECONDARY,
+  SECONDARY_LIGHT,
+  SECONDARY_DARK,
+  TERIARY,
+  TERIARY_LIGHT,
+  TERIARY_DARK,
+  GREY_LIGHT_1,
+  GREY_LIGHT_2,
+  GREY_LIGHT_3,
+  GREY_LIGHT_4,
+  GREY_DARK_1,
+  GREY_DARK_2,
+  GREY_DARK_3,
+  GREY_DARK_4,
+  WHITE,
+  BLACK
+};

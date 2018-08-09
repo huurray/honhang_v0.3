@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-
 import MainSearch from '../components/MainSearch';
 
-class MainSearchCon extends Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
+import * as searchActions from '../modules/search';
+import * as inputActions from '../modules/input';
+
+class MainSearchCon extends Component {
   state = {
     imgArray: [null, null, null],
     imgNum: 1,
@@ -21,20 +25,49 @@ class MainSearchCon extends Component {
     }
   };
 
+  //searchValue dispatch
+
+  onHandleChange = e => {
+    const { inputActions } = this.props;
+    inputActions.inputPlaceKeyword(e.target.value);
+  };
+
+  onInsert = () => {
+    const { searchActions, placeKeyword } = this.props;
+    searchActions.search(placeKeyword);
+  };
+
   componentDidMount() {
     setInterval(this.onImageSlide, 10000);
   }
 
   render() {
-
     const { imgNum, imgArray } = this.state;
+    const { placeKeyword } = this.props;
 
     return (
       <div>
-        <MainSearch imgNum={imgNum} imgArray={imgArray} />
+        <MainSearch
+          imgNum={imgNum}
+          imgArray={imgArray}
+          placeKeyword={placeKeyword}
+          onHandleChange={this.onHandleChange}
+          onInsert={this.onInsert}
+        />
       </div>
     );
   }
 }
 
-export default MainSearchCon;
+const mapStateToProps = state => ({
+  placeKeyword: state.input.get('placeKeyword')
+});
+const mapDispatchToProps = dispatch => ({
+  inputActions: bindActionCreators(inputActions, dispatch),
+  searchActions: bindActionCreators(searchActions, dispatch),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainSearchCon);

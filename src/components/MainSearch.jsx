@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { Button } from '../styles/ui'
+import { Button } from '../styles/ui';
 
 const Section = styled.section`
   width: 100%;
@@ -32,7 +32,7 @@ const MainSearchBox = styled.div`
 const SearchText = styled.h1`
   width: 100%;
   margin: 13rem 0 7rem 0;
-  padding-right: 2rem;
+  padding-right: 5%;
   text-align: center;
   ${props => props.theme.font.header_secondary};
 `;
@@ -61,10 +61,10 @@ const SearchInput = styled.input`
   border: none;
   display: block;
   outline: none;
-  box-shadow: 0 1rem 2rem rgba(0,0,0, 0.3);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
   &::-webkit-input-placeholder {
     color: ${props => props.theme.colors.GREY_DARK_1};
-  };
+  }
   &:-ms-input-placeholder {
     color: ${props => props.theme.colors.GREY_DARK_1};
   }
@@ -84,6 +84,8 @@ class MainSearch extends Component {
   };
 
   render() {
+    const { onInsert, placeKeyword, onHandleChange } = this.props;
+
     return (
       <Section>
         <BgImgBox>{this.bgImgList()}</BgImgBox>
@@ -94,7 +96,13 @@ class MainSearch extends Component {
           <Search>
             <SearchElement half>
               <SearchLabel white>여행지 키워드 *</SearchLabel>
-              <SearchInput type="text" placeholder="에펠탑" autocomplete="off" />
+              <SearchInput
+                type="text"
+                onChange={onHandleChange}
+                value={placeKeyword}
+                placeholder="에펠탑"
+                autocomplete="off"
+              />
             </SearchElement>
             <SearchElement>
               <SearchLabel white>날짜</SearchLabel>
@@ -102,7 +110,7 @@ class MainSearch extends Component {
             </SearchElement>
             <SearchElement>
               <SearchLabel white>&nbsp;</SearchLabel>
-              <Button>검색하기</Button>
+              <Button onClick={onInsert}>검색하기</Button>
             </SearchElement>
           </Search>
         </MainSearchBox>

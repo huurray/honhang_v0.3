@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const Section = styled.section`
@@ -15,7 +15,6 @@ const SocialBox = styled.div`
   width: 50%;
   height: 3rem;
   text-decoration: none;
-  text-align: center;
   float: left;
   color: ${props => props.theme.colors.GREY_DARK_3};
   cursor:pointer;
@@ -25,12 +24,13 @@ const LogoImg = styled.img`
   float: left;
   width: 2.5rem;
   height: auto;
-  margin-left: 7rem;
+  margin-left: 1rem;
 `;
 const SocialText = styled.h2`
   font-size: 2rem;
   font-family: 'Lato', serif;
   font-weight: 200;
+  text-align:center;
 `;
 const MainSocial = () => {
   return (

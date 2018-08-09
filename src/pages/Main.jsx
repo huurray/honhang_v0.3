@@ -1,29 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-import HeaderNavBar from '../components/HeaderNavBar';
+import HeaderNavBarCon from '../containers/HeaderNavBarCon';
 import MainSearchCon from '../containers/MainSearchCon';
 import MainComment from '../components/MainComment';
 import MainCategory from '../components/MainCategory';
 import MainSocial from '../components/MainSocial';
+import Footer from '../components/Footer';
 
 const PageContainer = styled.main`
   width: 100%;
   position: relative;
 `;
 
-class Main extends Component {
-  render() {
-    return (
-      <PageContainer>
-        <HeaderNavBar />
-        <MainSearchCon />
-        <MainComment />
-        <MainCategory />
-        <MainSocial />
-      </PageContainer>
-    );
-  }
-}
+const Main = () => {
+
+  return (
+    <PageContainer>
+      <HeaderNavBarCon />
+      <MainSearchCon />
+      <MainComment />
+      <MainCategory />
+      <MainSocial />
+      <Footer />
+    </PageContainer>
+  );
+};
 
 export default Main;

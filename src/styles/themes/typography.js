@@ -24,6 +24,15 @@ const header_tertiary = css`
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 
+const english_primary = css`
+  font-family: 'Lato', serif;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: ${props => (props.white ? '#fff' : '#222')};
+`;
+
 const sub_header = css`
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 500;
@@ -84,6 +93,7 @@ export default {
   header_primary,
   header_secondary,
   header_tertiary,
+  english_primary,
   sub_header,
   para_primary,
   para_secondary,

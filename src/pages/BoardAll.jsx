@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import BoardAllCon from '../containers/BoardAllCon';
+import HeaderNavBarCon from '../containers/HeaderNavBarCon';
 
 const PageContainer = styled.main`
   overflow: hidden;
 `;
 const Section = styled.main`
-  width: 90%;
+  width: 80%;
   height: 100vh;
   margin: 0 auto;
   padding: 12rem 0 8rem 0;
@@ -19,8 +20,7 @@ const BgImage = styled.img`
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: -1;
-  backface-visibility: hidden;
+  z-index: -1;;
 `;
 
 const BoardAll = () => {
@@ -28,6 +28,7 @@ const BoardAll = () => {
     <PageContainer>
       <BgImage src={require('../common/img/board-back.jpg')} alt="board-back" />
       <Section>
+        <HeaderNavBarCon />
         <BoardAllCon />
       </Section>
     </PageContainer>

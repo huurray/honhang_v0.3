@@ -91,7 +91,7 @@ class MainSearch extends Component {
         <BgImgBox>{this.bgImgList()}</BgImgBox>
         <MainSearchBox>
           <SearchText white>
-            외롭지않은 나홀로 여행, 동행을 찾아보세요.
+            외롭지않은 홀로 여행, 동행을 찾아보세요.
           </SearchText>
           <Search>
             <SearchElement half>

@@ -8,7 +8,7 @@ const Section = styled.section`
   position: fixed;
   top: 0;
   left: 0;
-  padding: 3rem 20rem;
+  padding: 3rem 10%;
   z-index: 9;
   box-shadow: ${props => props.on && '0 1rem 1.5rem rgba(0,0,0, 0.1)'};
   background-color: ${props => props.on && '#fff'};

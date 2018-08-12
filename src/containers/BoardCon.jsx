@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import BoardList from '../components/BoardList';
 
 import { connect } from 'react-redux';
@@ -6,14 +7,19 @@ import { bindActionCreators } from 'redux';
 
 import * as searchActions from '../modules/search';
 
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
 class BoardCon extends Component {
   render() {
     
     return (
-      <div>
+      <Container>
         {this.props.searchValue}
         <BoardList />
-      </div>
+      </Container>
     );
   }
 }

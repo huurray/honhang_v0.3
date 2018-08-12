@@ -5,6 +5,7 @@ import arrowRight from '../common/img/arrow-right.png';
 const BoardBox = styled.div`
   float: left;
   width: 45%;
+  height: 100%;
   position: relative;
   max-height: 100%;
   overflow: auto;
@@ -14,6 +15,7 @@ const List = styled.ul`
   height: 100%;
 `;
 const Total = styled.p`
+  ${props => props.theme.font.para_tiny};
   color: rgba(255, 255, 255, 0.6) !important;
   margin-left: 3rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -65,7 +67,7 @@ class BoardList extends Component {
     return (
       <BoardBox>
         <List>
-          <Total>sdf</Total>
+          <Total>TOTAL 24</Total>
           <ListItem on>
             <ListTitle on white>
               <ListNum white>01&nbsp;&nbsp;-&nbsp;</ListNum>

@@ -36,7 +36,6 @@ const ListItem = styled.li`
   &:active {
     background-position: 100%;
   }
-
   background-position: ${props => props.on && '100%'};
 `;
 const ListTitle = styled.div`
@@ -63,17 +62,62 @@ const ListNum = styled.p`
 `;
 
 class BoardList extends Component {
+  state = {
+    on: false,
+    moreList: 1
+  };
+
+  allListshow = () => {
+    const { dataList, onSelect } = this.props;
+    const { on, moreList } = this.state;
+
+    return dataList.data.map((list, i) => {
+      let number = '';
+      if (i < 9) {
+        number = `0${i + 1}`;
+      } else {
+        number = `${i + 1}`;
+      }
+
+      const showList = () => {
+        if (i < moreList * 20) {
+          return (
+            <ListItem key={i} onClick={() => onSelect(i)} on={on}>
+              <ListTitle on={on} white>
+                <ListNum white>
+                  {number}
+                  &nbsp;&nbsp;-&nbsp;
+                </ListNum>
+                {list.title}
+              </ListTitle>
+            </ListItem>
+          );
+        }
+      }
+
+      return showList();
+    });
+  };
+
+  componentDidMount() {
+    const { moreList } = this.state;
+    //infinite scroll list
+    const showMore = () => this.setState({ moreList: moreList + 1 });
+    this.boardBox.addEventListener('scroll', function() {
+      if (this.scrollTop + this.clientHeight >= this.scrollHeight) {
+        showMore();
+      }
+    });
+  }
+
   render() {
+    const { dataList } = this.props;
+
     return (
-      <BoardBox>
+      <BoardBox innerRef={ref => (this.boardBox = ref)}>
         <List>
-          <Total>TOTAL 24</Total>
-          <ListItem on>
-            <ListTitle on white>
-              <ListNum white>01&nbsp;&nbsp;-&nbsp;</ListNum>
-              오늘 에펠탑 야경구경하실분?
-            </ListTitle>
-          </ListItem>
+          <Total>TOTAL {dataList.data.length}</Total>
+          {this.allListshow()}
         </List>
       </BoardBox>
     );

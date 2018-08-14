@@ -16,10 +16,27 @@ const header_secondary = css`
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 
+const header_secondarySmall = css`
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 1.5;
+  color: ${props => (props.white ? '#fff' : '#222')};
+`;
+
 const header_tertiary = css`
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 500;
   font-size: 1.8rem;
+  line-height: 1.5;
+  color: ${props => (props.white ? '#fff' : '#222')};
+`;
+
+const english_big = css`
+  font-family: 'Lato', serif;
+  text-decoration: none;
+  font-size: 3.5rem;
+  font-weight: 700;
   line-height: 1.5;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
@@ -61,7 +78,7 @@ const para_primary = css`
 
 const para_secondary = css`
   font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 300;
+  font-weight: 500;
   font-size: 1.5rem;
   line-height: 1.5;
   color: ${props => (props.white ? '#fff' : '#222')};
@@ -92,7 +109,9 @@ const para_tiny = css`
 export default {
   header_primary,
   header_secondary,
+  header_secondarySmall,
   header_tertiary,
+  english_big,
   english_primary,
   sub_header,
   para_primary,

@@ -13,12 +13,12 @@ const PageContainer = styled.main`
   position: relative;
 `;
 
-const Main = () => {
+const Main = ({history}) => {
 
   return (
     <PageContainer>
-      <HeaderNavBarCon />
-      <MainSearchCon />
+      <HeaderNavBarCon history={history} />
+      <MainSearchCon history={history} />
       <MainComment />
       <MainCategory />
       <MainSocial />

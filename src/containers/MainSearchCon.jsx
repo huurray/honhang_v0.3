@@ -33,8 +33,12 @@ class MainSearchCon extends Component {
   };
 
   onInsert = () => {
+    const { history } = this.props;
+
     const { searchActions, placeKeyword } = this.props;
     searchActions.search(placeKeyword);
+    history.push('/board');
+
   };
 
   componentDidMount() {

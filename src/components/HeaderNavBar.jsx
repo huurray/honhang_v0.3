@@ -37,10 +37,30 @@ const NavListToMake = styled.div`
     margin-right: 3rem;
   }
 `;
+const ProfileBox = styled.div`
+  float: right;
+  width: 10rem;
+  height: 2.5rem;
+  cursor: pointer;
+`;
 const ProfileImg = styled.img`
   width: 1.5rem;
   height: auto;
   margin-right: 1rem;
+`;
+const ProfileContent = styled.div`
+  margin-top: 0.5rem;
+  width: 10rem;
+  height: 10rem;
+  background-color: ${props => props.theme.colors.WHITE};
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  border: 1px solid ${props => props.theme.colors.GREY_LIGHT_3};
+  opacity: ${props => props.on ? '1' : '0'};
+`;
+const ProfileText = styled.div`
+  ${props => props.theme.font.para_secondary};
+  text-align: center;
+  margin: 0.5rem;
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -57,7 +77,15 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const HeaderNavBar = ({ logoImg, iconUser, downArrow, onScrollDown }) => {
+const HeaderNavBar = ({
+  logoImg,
+  iconUser,
+  downArrow,
+  onScrollDown,
+  onClickProfile,
+  isProfileOn,
+  history
+}) => {
   return (
     <Section on={onScrollDown}>
       <NavBarLeft>
@@ -66,7 +94,7 @@ const HeaderNavBar = ({ logoImg, iconUser, downArrow, onScrollDown }) => {
         </StyledLink>
       </NavBarLeft>
       <NavBarRight>
-        <StyledLink to="/boardall">
+        <StyledLink to="/">
           <NavList white on={onScrollDown}>
             로컬 멘토
           </NavList>
@@ -76,14 +104,21 @@ const HeaderNavBar = ({ logoImg, iconUser, downArrow, onScrollDown }) => {
             동행 리스트
           </NavList>
         </StyledLink>
-        <StyledLink to="/boardall">
+        <StyledLink to="/makeup">
           <NavListToMake primary_light on={onScrollDown}>
-            동행 만들기
+            동행 모집
           </NavListToMake>
         </StyledLink>
         <NavList white>
-          <ProfileImg src={require(`../common/img/${iconUser}.png`)} />
-          <ProfileImg src={require(`../common/img/${downArrow}.png`)} />
+          <ProfileBox onClick={onClickProfile}>
+            <ProfileImg src={require(`../common/img/${iconUser}.png`)} />
+            <ProfileImg src={require(`../common/img/${downArrow}.png`)} />
+            <ProfileContent on={isProfileOn}>
+              <ProfileText onClick={()=>{
+                history.push('./signin')
+              }}>로그인</ProfileText>
+            </ProfileContent>
+          </ProfileBox>
         </NavList>
       </NavBarRight>
     </Section>

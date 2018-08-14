@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import SignInCon from '../containers/SignInCon';
+import SignUpCon from '../containers/SignUpCon';
 
 const PageContainer = styled.main`
   width: 100%;
   position: relative;
 `;
 
-const SignIn = ({history}) => {
+const SignUp = ({history}) => {
   return (
     <PageContainer>
-      <SignInCon history={history} />
+      <SignUpCon history={history} />
     </PageContainer>
   );
 };
 
-export default SignIn;
+export default SignUp;

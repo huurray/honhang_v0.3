@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { Button } from '../styles/ui';
+import { SpecialButton } from '../styles/ui';
 
 const Section = styled.section`
   width: 100%;
@@ -110,7 +110,7 @@ class MainSearch extends Component {
             </SearchElement>
             <SearchElement>
               <SearchLabel white>&nbsp;</SearchLabel>
-              <Button onClick={onInsert}>검색하기</Button>
+              <SpecialButton onClick={onInsert}>검색하기</SpecialButton>
             </SearchElement>
           </Search>
         </MainSearchBox>

@@ -17,27 +17,39 @@ const Container = styled.div`
 
 class BoardAllCon extends Component {
 
-  a =  () => {
-   this.props.listAllActions.ListUpAll();
-   console.log(this.props.dataList);
+  state = {
+    selectIndex: -1 
   }
 
-  componentDidMount(){
-    this.a();
+  getlists = () => {
+    this.props.listAllActions.listUpAll();
+  };
+
+  componentDidMount() {
+    this.getlists();
   }
+
+  onSelect = (i) => {
+    this.setState({selectIndex: i})
+  }
+
   render() {
+    const { dataList } = this.props;
+    const { selectIndex } = this.state;
+
     return (
       <Container>
+        {dataList.loading && 'loading...'}
         <BoardSort />
-        <BoardList />
-        <BoardDetail />
+        <BoardList dataList={dataList} onSelect={this.onSelect} />
+        <BoardDetail dataList={dataList} selectIndex={selectIndex} />
       </Container>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  dataList: state.listAll.getIn([0, "city"])
+  dataList: state.listAll.toJS()
 });
 const mapDispatchToProps = dispatch => ({
   listAllActions: bindActionCreators(listAllActions, dispatch)

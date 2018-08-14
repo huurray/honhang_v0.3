@@ -20,15 +20,15 @@ const BgImage = styled.img`
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: -1;;
+  z-index: -1;
 `;
 
-const BoardAll = () => {
+const BoardAll = ({ history }) => {
   return (
     <PageContainer>
       <BgImage src={require('../common/img/board-back.jpg')} alt="board-back" />
       <Section>
-        <HeaderNavBarCon />
+        <HeaderNavBarCon history={history} />
         <BoardAllCon />
       </Section>
     </PageContainer>

@@ -7,7 +7,7 @@ export const search = createAction(SEARCH);
 
 //reducer
 const initialState = Map({
-  searchValue: "yoyo"
+  searchValue: "에펠탑"
 })
 
 export default handleActions({

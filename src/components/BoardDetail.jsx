@@ -17,12 +17,13 @@ const DetailModal = styled.div`
 const DetailContent = styled.div`
   position: absolute;
   top: 0;
-  right: 0;
-  opacity: 1;
+  right: ${props => props.on ? "0" : "-60rem"}
+  display: ${props => props.on ? "1" : "0"}
   width: 100%;
   height: 100%;
   display: block;
   padding: 4rem;
+  transition: all 0.5s;
   background-color: rgba(255, 255, 255, 0.05);
 `;
 const DetailRow = styled.div`
@@ -41,7 +42,7 @@ const DetailH3 = styled.h3`
   color: ${props => props.theme.colors.WHITE} !important;
   margin-top: 1rem;
 `;
-const DetailP = styled.p`
+const DetailP = styled.div`
   ${props => props.theme.font.para_secondary};
   color: ${props => props.theme.colors.WHITE} !important;
   margin-top: 1rem;
@@ -70,49 +71,62 @@ const KakaoId = styled.div`
   font-size: 1.7rem !important;
   font-family: 'Lato', serif;
 `;
+
 class BoardDetail extends Component {
-  render() {
-    return (
-      <Detail>
-        <DetailModal>
-          <DetailContent>
+
+
+  allDetailShow = () => {
+    const { dataList, selectIndex } = this.props;
+
+    return dataList.data.map((list, i) => {
+      return (
+        <DetailContent key={i} on={i===selectIndex}>
             <DetailH1>
               <DetailTitle>제목.</DetailTitle>
-              오늘 에펠탑 구경가실분?
+              {list.title}
             </DetailH1>
             <DetailRow>
               <DetailH3>
                 <DetailTitle>여행지.</DetailTitle>
-                에펠탑
+                {list.place}
               </DetailH3>
               <DetailH3>
                 <DetailTitle>도시.</DetailTitle>
-                파리
+                {list.city}
               </DetailH3>
             </DetailRow>
             <DetailRow>
               <DetailH3>
                 <DetailTitle>날짜.</DetailTitle>
-                2018/06/14
+                {list.date}
               </DetailH3>
               <DetailH3>
                 <DetailTitle>시간.</DetailTitle>
-                10:00 AM
+                {list.time}
               </DetailH3>
             </DetailRow>
             <DetailH3>
               <DetailTitle>최대인원.</DetailTitle>
-              4명
+              {list.howMany}
             </DetailH3>
             <DetailP>
               <DetailTitle>내용.</DetailTitle>
-              안녕하세용.반갑습니당.
+              {list.content}
             </DetailP>
             <DetailAbsol>
               <DetailTitle>카카오톡ID.</DetailTitle>
-              <KakaoId>gjwnsgur91</KakaoId>
+              <KakaoId>{list.kakao}</KakaoId>
             </DetailAbsol>
           </DetailContent>
+      )
+    })
+  }
+
+  render() {
+    return (
+      <Detail>
+        <DetailModal>
+          {this.allDetailShow()}
         </DetailModal>
       </Detail>
     );

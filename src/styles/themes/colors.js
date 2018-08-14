@@ -19,6 +19,7 @@ const GREY_DARK_3 = '#333';
 const GREY_DARK_4 = '#222';
 
 const WHITE = '#FFF';
+const WHITE_TRANS = 'rgba(255,255,255,0.7)';
 const BLACK = '#000';
 
 export default {
@@ -40,5 +41,6 @@ export default {
   GREY_DARK_3,
   GREY_DARK_4,
   WHITE,
+  WHITE_TRANS,
   BLACK
 };

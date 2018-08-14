@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import backImg from '../common/img/signin-back.jpg';
+
+import Loading from '../common/Loading';
+import SideModal from '../common/SideModal';
 import { SpecialButton } from '../styles/ui/buttons';
 
 const Bg = styled.div`
@@ -39,7 +43,7 @@ const Copyright = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 `;
-const CardForm = styled.form`
+const CardForm = styled.div`
   margin: 0 auto;
   width: 30rem;
 `;
@@ -98,9 +102,24 @@ const FormLink = styled.a`
     border-bottom: 1px solid ${props => props.theme.colors.WHITE};
   }
 `;
-const SignUpCard = ({ history }) => {
+const SignUpCard = ({
+  history,
+  onHandleChange,
+  onHandleKeyPress,
+  onInsert,
+  loadingState,
+  modalState,
+  errorMessage,
+  hideSideModal
+}) => {
   return (
     <Bg>
+      {loadingState && <Loading />}
+      <SideModal
+        text={errorMessage}
+        modalState={modalState}
+        hideSideModal={hideSideModal}
+      />
       <CardBox>
         <CardTitle white>SIGNUP</CardTitle>
         <CardText white>이메일 주소로 회원가입이 가능합니다.</CardText>
@@ -110,7 +129,8 @@ const SignUpCard = ({ history }) => {
               white
               type="email"
               placeholder="가입할 이메일 아이디"
-              id="email"
+              onChange={onHandleChange}
+              name="email"
               autoComplete="off"
               required
             />
@@ -123,7 +143,9 @@ const SignUpCard = ({ history }) => {
               white
               type="password"
               placeholder="가입할 비밀번호"
-              id="password"
+              onChange={onHandleChange}
+              onKeyPress={onHandleKeyPress}
+              name="password"
               autoComplete="off"
               required
             />
@@ -132,7 +154,7 @@ const SignUpCard = ({ history }) => {
             </Label>
           </FormEach>
           <ButtonBox>
-            <SpecialButton>간단 회원가입</SpecialButton>
+            <SpecialButton onClick={onInsert}>간단 회원가입</SpecialButton>
           </ButtonBox>
           <FormRow>
             <FormLink

@@ -84,7 +84,8 @@ const HeaderNavBar = ({
   onScrollDown,
   onClickProfile,
   isProfileOn,
-  history
+  history,
+  loginStatus
 }) => {
   return (
     <Section on={onScrollDown}>
@@ -116,7 +117,7 @@ const HeaderNavBar = ({
             <ProfileContent on={isProfileOn}>
               <ProfileText onClick={()=>{
                 history.push('./signin')
-              }}>로그인</ProfileText>
+              }}>{loginStatus}</ProfileText>
             </ProfileContent>
           </ProfileBox>
         </NavList>

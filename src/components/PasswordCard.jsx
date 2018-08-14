@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import backImg from '../common/img/signin-back.jpg';
+
+import Loading from '../common/Loading';
+import SideModal from '../common/SideModal';
 import { SpecialButton } from '../styles/ui/buttons';
 
 const Bg = styled.div`
@@ -40,13 +44,13 @@ const Copyright = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 `;
-const CardForm = styled.form`
+const CardForm = styled.div`
   margin: 0 auto;
   width: 30rem;
 `;
 const FormEach = styled.div`
   text-align: center;
-  margin-top: 5rem;
+  margin-top: 3.5rem;
   &:first-child {
     margin-bottom: 1.5rem;
   }
@@ -75,16 +79,9 @@ const Input = styled.input`
     color: rgba(255, 255, 255, 0.8);
   }
 `;
-const Label = styled.label`
-  ${props => props.theme.font.para_tiny};
-  text-align: left;
-  color: ${props => props.theme.colors.WHITE_TRANS} !important;
-  display: block;
-  margin-left: 1rem;
-`;
 const ButtonBox = styled.div`
   text-align: center;
-  margin: 3rem;
+  margin: 5rem 3rem;
 `;
 const FormRow = styled.div`
   margin-top: 2rem;
@@ -100,9 +97,24 @@ const FormLink = styled.a`
     border-bottom: 1px solid ${props => props.theme.colors.WHITE};
   }
 `;
-const PasswordCard = ({ history }) => {
+const PasswordCard = ({
+  history,
+  onHandleChange,
+  onHandleKeyPress,
+  onInsert,
+  loadingState,
+  modalState,
+  errorMessage,
+  hideSideModal
+}) => {
   return (
     <Bg>
+      {loadingState && <Loading />}
+      <SideModal
+        text={errorMessage}
+        modalState={modalState}
+        hideSideModal={hideSideModal}
+      />
       <CardBox>
         <CardTitle white>NEW PASSWORD</CardTitle>
         <CardText white>
@@ -114,17 +126,16 @@ const PasswordCard = ({ history }) => {
             <Input
               white
               type="email"
-              placeholder="이메일 아이디"
-              id="email"
+              placeholder="이메일 ID"
+              name="email"
+              onChange={onHandleChange}
+              onKeyPress={onHandleKeyPress}
               autoComplete="off"
               required
             />
-            <Label white htmlFor="email">
-              가입하신 이메일 ID
-            </Label>
           </FormEach>
           <ButtonBox>
-            <SpecialButton>비밀번호 변경</SpecialButton>
+            <SpecialButton onClick={onInsert}>비밀번호 변경</SpecialButton>
           </ButtonBox>
           <FormRow>
             <FormLink

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import BoardList from '../components/BoardList';
 import BoardDetail from '../components/BoardDetail';
 import BoardSort from '../components/BoardSort';
+import Loading from '../common/Loading';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -39,7 +40,7 @@ class BoardAllCon extends Component {
 
     return (
       <Container>
-        {dataList.loading && 'loading...'}
+        {dataList.loading && <Loading top/>}
         <BoardSort />
         <BoardList dataList={dataList} onSelect={this.onSelect} />
         <BoardDetail dataList={dataList} selectIndex={selectIndex} />

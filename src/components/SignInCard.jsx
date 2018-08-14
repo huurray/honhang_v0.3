@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import backImg from '../common/img/signin-back.jpg';
+
+import Loading from '../common/Loading';
+import SideModal from '../common/SideModal';
 import { SpecialButton } from '../styles/ui/buttons';
 
 const Bg = styled.div`
@@ -42,7 +46,7 @@ const Copyright = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 `;
-const CardForm = styled.form`
+const CardForm = styled.div`
   margin: 0 auto;
   width: 30rem;
 `;
@@ -101,9 +105,24 @@ const FormLink = styled.a`
     border-bottom: 1px solid ${props => props.theme.colors.WHITE};
   }
 `;
-const SignInCard = ({ history }) => {
+const SignInCard = ({
+  history,
+  onHandleChange,
+  onHandleKeyPress,
+  onInsert,
+  loadingState,
+  modalState,
+  errorMessage,
+  hideSideModal
+}) => {
   return (
     <Bg>
+      {loadingState && <Loading />}
+      <SideModal
+        text={errorMessage}
+        modalState={modalState}
+        hideSideModal={hideSideModal}
+      />
       <CardBox>
         <Logo>
           <LogoImg src={require('../common/img/logo-white.png')} alt="" />
@@ -115,7 +134,8 @@ const SignInCard = ({ history }) => {
               white
               type="email"
               placeholder="이메일 아이디"
-              id="email"
+              name="email"
+              onChange={onHandleChange}
               autoComplete="off"
               required
             />
@@ -128,7 +148,9 @@ const SignInCard = ({ history }) => {
               white
               type="password"
               placeholder="비밀번호"
-              id="password"
+              name="password"
+              onChange={onHandleChange}
+              onKeyPress={onHandleKeyPress}
               autoComplete="off"
               required
             />
@@ -137,7 +159,7 @@ const SignInCard = ({ history }) => {
             </Label>
           </FormEach>
           <ButtonBox>
-            <SpecialButton>로그인</SpecialButton>
+            <SpecialButton onClick={onInsert}>로그인</SpecialButton>
           </ButtonBox>
           <FormRow>
             <FormLink

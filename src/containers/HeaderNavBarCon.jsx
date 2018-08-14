@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import HeaderNavBar from '../components/HeaderNavBar';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import * as stateActions from '../modules/status';
+
+
 class HeaderNavBarCon extends Component {
   state = {
     isBlack: this.props.isBlack,
@@ -10,6 +16,12 @@ class HeaderNavBarCon extends Component {
     downArrow: 'down-arrow',
     onScrollDown: false,
   };
+
+  componentWillMount() {
+    //로그인 상태 체크
+    const { stateActions} = this.props;
+    stateActions.isLogin();
+  }
 
   onClickProfile = () => {
     this.setState({ profile: !this.state.profile });
@@ -56,7 +68,8 @@ class HeaderNavBarCon extends Component {
 
   render() {
     const { logoImg, iconUser, downArrow, onScrollDown, profile } = this.state;
-    const { history } = this.props;
+    const { history, loginStatus } = this.props;
+    
     return (
       <div>
         <HeaderNavBar
@@ -67,10 +80,21 @@ class HeaderNavBarCon extends Component {
           onClickProfile={this.onClickProfile}
           isProfileOn={profile}
           history={history}
+          loginStatus={loginStatus}
         />
       </div>
     );
   }
 }
 
-export default HeaderNavBarCon;
+const mapStateToProps = state => ({
+  loginStatus: state.status.get("loginStatus")
+});
+const mapDispatchToProps = dispatch => ({
+  stateActions: bindActionCreators(stateActions, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HeaderNavBarCon);

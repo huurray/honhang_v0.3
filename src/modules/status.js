@@ -1,32 +1,39 @@
 import { Map } from 'immutable';
 import { handleActions, createAction } from 'redux-actions';
+import { pender } from 'redux-pender';
 import firebase from 'firebase';
 
 function getStatusAuth() {
-  let status = "";
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      console.log("logged in")
-      status = "로그아웃";
-    } else {
-      console.log("not logged in")
-      status =  "로그인";
-    }
+  return new Promise(resolve => {
+    firebase.auth().onAuthStateChanged(function(user) {
+      let state = "";
+      if (user) {
+        state = '로그아웃';
+      } else {
+        state = '로그인';
+      }
+      resolve(state);
+    });
   });
-  return status;
 }
 
 //action
-const STATE_LOGIN = 'state/LOGIN';
-export const isLogin = createAction(STATE_LOGIN, getStatusAuth);
+const STATUS_LOGIN = 'status/LOGIN';
+export const isLogin = createAction(STATUS_LOGIN, getStatusAuth);
 
 //reducer
 const initialState = Map({
-  loginStatus: "로그인"
+  loginStatus: '로그인'
 });
 
-export default handleActions({
-  [STATE_LOGIN]: (state, action) => {
-    return state.set('loginStatus', action.payload)
-  }
-}, initialState);
+export default handleActions(
+  {
+    ...pender({
+      type: STATUS_LOGIN,
+      onSuccess: (state, action) => {
+        return state.set('loginStatus', action.payload);
+      }
+    })
+  },
+  initialState
+);

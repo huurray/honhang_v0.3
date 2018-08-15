@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import HeaderNavBar from '../components/HeaderNavBar';
 
+import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as stateActions from '../modules/status';
+import * as statusActions from '../modules/status';
+import * as userActions from '../modules/user';
 
 
 class HeaderNavBarCon extends Component {
@@ -18,9 +20,11 @@ class HeaderNavBarCon extends Component {
   };
 
   componentWillMount() {
+    const { statusActions, userActions } = this.props;
     //로그인 상태 체크
-    const { stateActions} = this.props;
-    stateActions.isLogin();
+    statusActions.isLogin();
+    //유저 정보 가져오기
+    userActions.getUser();
   }
 
   onClickProfile = () => {
@@ -44,6 +48,17 @@ class HeaderNavBarCon extends Component {
       onScrollDown: false
     });
   };
+
+  toggleLogin = () => {
+    const {loginStatus,statusActions, history} = this.props;
+    if(loginStatus === "로그인") {
+      history.push('/signin')
+    } else if (loginStatus === "로그아웃") {
+      firebase.auth().signOut().then(function () {
+        statusActions.isLogin();
+      });
+    }
+  }
 
   componentDidMount() {
     //change NavBar on Scroll Event
@@ -81,6 +96,7 @@ class HeaderNavBarCon extends Component {
           isProfileOn={profile}
           history={history}
           loginStatus={loginStatus}
+          toggleLogin={this.toggleLogin}
         />
       </div>
     );
@@ -91,7 +107,8 @@ const mapStateToProps = state => ({
   loginStatus: state.status.get("loginStatus")
 });
 const mapDispatchToProps = dispatch => ({
-  stateActions: bindActionCreators(stateActions, dispatch)
+  statusActions: bindActionCreators(statusActions, dispatch),
+  userActions: bindActionCreators(userActions, dispatch)
 });
 
 export default connect(

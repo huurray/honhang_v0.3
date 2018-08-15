@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from '../styles/ui/buttons'
+import { SpecialButton } from '../styles/ui/buttons';
 
 const FormContainer = styled.div`
   width: 60%;
@@ -27,19 +27,30 @@ const FormElement = styled.div`
   }
 `;
 const FormText = styled.h2`
-  ${props => props.theme.font.para_small};
+  ${props => props.theme.font.para_tertiary};
+  font-weight: 500 !important;
   width: 20%;
 `;
 const FormInput = styled.input`
-  ${props => props.theme.font.para_small};
-  width: 30%;
+  ${props => props.theme.font.para_tertiary};
+  width: 35rem;
   height: 5rem;
   outline: none;
   padding-left: 1rem;
   border: 1px solid ${props => props.theme.colors.GREY_LIGHT_3};
   &::-webkit-input-placeholder {
-    color: {props => props.theme.colors.GREY_LIGHT_3};
+    color: ${props => props.theme.colors.GREY_LIGHT_3};
   }
+  &:focus {
+    border-bottom: 2px solid ${props => props.theme.colors.TERIARY};
+  }
+`;
+const ConfirmText = styled.p`
+  ${props => props.theme.font.para_tiny};
+  margin-left: 1.5rem;
+  color: ${props => props.theme.colors.PRIMARY};
+  font-weight: 500;
+  text-decoration: underline;
 `;
 const FormCheck = styled.input`
   width: 1.5rem;
@@ -47,7 +58,7 @@ const FormCheck = styled.input`
   margin-right: 1.5rem;
 `;
 const Label = styled.label`
-  ${props => props.theme.font.para_small};
+  ${props => props.theme.font.para_tertiary};
 `;
 const Atag = styled.a`
   margin-left: 1rem;
@@ -62,15 +73,16 @@ const FormButtonBox = styled.div`
   margin-top: 5rem;
 `;
 
-const AuthForm = () => {
+const AuthForm = ({ isKakaoLogin, onHandleChange, onInsert }) => {
   return (
     <FormContainer>
       <FormElement>
         <FormText>이름</FormText>
         <FormInput
           type="text"
-          id="myName"
+          name="name"
           placeholder="이름을 입력해주세요."
+          onChange={onHandleChange}
           autoComplete="off"
           required
         />
@@ -79,8 +91,9 @@ const AuthForm = () => {
         <FormText>나이</FormText>
         <FormInput
           type="text"
-          id="myAge"
+          name="age"
           placeholder="나이를 입력해주세요."
+          onChange={onHandleChange}
           autoComplete="off"
           required
         />
@@ -89,8 +102,9 @@ const AuthForm = () => {
         <FormText>거주도시</FormText>
         <FormInput
           type="text"
-          id="myCity"
+          name="city"
           placeholder="거주도시를 입력해주세요."
+          onChange={onHandleChange}
           autoComplete="off"
           required
         />
@@ -99,8 +113,9 @@ const AuthForm = () => {
         <FormText>휴대폰번호</FormText>
         <FormInput
           type="text"
-          id="myPhone"
+          name="phone"
           placeholder="- 없이 숫자만 입력해주세요."
+          onChange={onHandleChange}
           autoComplete="off"
           required
         />
@@ -109,15 +124,20 @@ const AuthForm = () => {
         <FormText>카카오톡ID</FormText>
         <FormInput
           type="text"
-          id="myKakao"
+          name="kakaoId"
           placeholder="내 카카오톡 ID"
+          onChange={onHandleChange}
           autoComplete="off"
           required
         />
       </FormElement>
       <FormElement>
         <FormText>카카오톡 연동</FormText>
-        <a id="kakao-login-btn" />
+        {/* 카카오버튼 */}
+        <a id="kakao-login-btn">&nbsp;</a>
+        {isKakaoLogin && (
+          <ConfirmText>카카오 프로필 연동이 완료되었습니다!</ConfirmText>
+        )}
       </FormElement>
       <FormElement>
         <FormCheck type="checkbox" id="auth-agree1" />
@@ -142,8 +162,10 @@ const AuthForm = () => {
         <Atag>내용보기</Atag>
       </FormElement>
       <FormButtonBox>
-        <Button white marginRight>취소</Button>
-        <Button>확인</Button>
+        <SpecialButton white marginRight>
+          취소
+        </SpecialButton>
+        <SpecialButton onClick={onInsert}>확인</SpecialButton>
       </FormButtonBox>
     </FormContainer>
   );

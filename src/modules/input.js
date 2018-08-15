@@ -3,6 +3,7 @@ import {handleActions, createAction} from 'redux-actions';
 
 //action
 const INPUT_PLACEKEYWORD = 'input/INPUT';
+
 export const inputPlaceKeyword = createAction(INPUT_PLACEKEYWORD);
 
 //reducer

@@ -110,7 +110,7 @@ class MainSearch extends Component {
             </SearchElement>
             <SearchElement>
               <SearchLabel white>&nbsp;</SearchLabel>
-              <SpecialButton onClick={onInsert}>검색하기</SpecialButton>
+              <SpecialButton full onClick={onInsert}>검색하기</SpecialButton>
             </SearchElement>
           </Search>
         </MainSearchBox>

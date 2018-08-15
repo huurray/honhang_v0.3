@@ -4,9 +4,9 @@ const PRIMARY_DARK = '#ff3f7d';
 const SECONDARY = '#D0E2D0';
 const SECONDARY_LIGHT = '#8ECF91';
 const SECONDARY_DARK = '#50A050';
-const TERIARY = '#3FCBCE';
-const TERIARY_LIGHT = '#80EDEA';
-const TERIARY_DARK = '#209E9E';
+const TERIARY = '#9966ff';
+
+const GRADIENT = 'linear-gradient(to right, #9999ff, #9966ff, #cc33cc, #ff66cc)'
 
 const GREY_LIGHT_1 = '#F7F7F7';
 const GREY_LIGHT_2 = '#EEE';
@@ -23,6 +23,7 @@ const WHITE_TRANS = 'rgba(255,255,255,0.7)';
 const BLACK = '#000';
 
 export default {
+  GRADIENT,
   PRIMARY,
   PRIMARY_LIGHT,
   PRIMARY_DARK,
@@ -30,8 +31,6 @@ export default {
   SECONDARY_LIGHT,
   SECONDARY_DARK,
   TERIARY,
-  TERIARY_LIGHT,
-  TERIARY_DARK,
   GREY_LIGHT_1,
   GREY_LIGHT_2,
   GREY_LIGHT_3,

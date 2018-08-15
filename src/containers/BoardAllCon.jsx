@@ -17,22 +17,22 @@ const Container = styled.div`
 `;
 
 class BoardAllCon extends Component {
-
   state = {
-    selectIndex: -1 
-  }
+    selectIndex: -1
+  };
 
   getlists = () => {
-    this.props.listAllActions.listUpAll();
+    const { listAllActions } = this.props;
+    listAllActions.listUpAll();
   };
 
   componentDidMount() {
     this.getlists();
   }
 
-  onSelect = (i) => {
-    this.setState({selectIndex: i})
-  }
+  onSelect = i => {
+    this.setState({ selectIndex: i });
+  };
 
   render() {
     const { dataList } = this.props;
@@ -40,7 +40,7 @@ class BoardAllCon extends Component {
 
     return (
       <Container>
-        {dataList.loading && <Loading top/>}
+        {dataList.loading && <Loading top />}
         <BoardSort />
         <BoardList dataList={dataList} onSelect={this.onSelect} />
         <BoardDetail dataList={dataList} selectIndex={selectIndex} />

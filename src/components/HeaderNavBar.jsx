@@ -60,7 +60,10 @@ const ProfileContent = styled.div`
 const ProfileText = styled.div`
   ${props => props.theme.font.para_secondary};
   text-align: center;
-  margin: 0.5rem;
+  padding: 0.5rem;
+  &:hover {
+    background-color: ${props => props.theme.colors.GREY_LIGHT_2};
+  }
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -85,7 +88,8 @@ const HeaderNavBar = ({
   onClickProfile,
   isProfileOn,
   history,
-  loginStatus
+  loginStatus,
+  toggleLogin
 }) => {
   return (
     <Section on={onScrollDown}>
@@ -115,9 +119,9 @@ const HeaderNavBar = ({
             <ProfileImg src={require(`../common/img/${iconUser}.png`)} />
             <ProfileImg src={require(`../common/img/${downArrow}.png`)} />
             <ProfileContent on={isProfileOn}>
-              <ProfileText onClick={()=>{
-                history.push('./signin')
-              }}>{loginStatus}</ProfileText>
+              <ProfileText onClick={toggleLogin}>{loginStatus}</ProfileText>
+              <ProfileText>마이페이지</ProfileText>
+              <ProfileText>설정</ProfileText>
             </ProfileContent>
           </ProfileBox>
         </NavList>

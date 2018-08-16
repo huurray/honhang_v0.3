@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { SpecialButton } from '../styles/ui/buttons';
+import SideModal from '../common/SideModal';
 
 const FormContainer = styled.div`
   width: 60%;
@@ -73,9 +74,23 @@ const FormButtonBox = styled.div`
   margin-top: 5rem;
 `;
 
-const AuthForm = ({ isKakaoLogin, onHandleChange, onInsert }) => {
+const AuthForm = ({
+  isKakaoLogin,
+  onHandleChange,
+  onInsert,
+  check1,
+  check2,
+  check3,
+  checkAll,
+  onCheckboxChange,
+  onCheckboxAllChange
+}) => {
   return (
     <FormContainer>
+      <SideModal 
+        modalState
+        text="sdfsdfsd"
+      />
       <FormElement>
         <FormText>이름</FormText>
         <FormInput
@@ -140,22 +155,22 @@ const AuthForm = ({ isKakaoLogin, onHandleChange, onInsert }) => {
         )}
       </FormElement>
       <FormElement>
-        <FormCheck type="checkbox" id="auth-agree1" />
+        <FormCheck type="checkbox" name="check1" checked={check1} onChange={onCheckboxChange} id="auth-agree1" />
         <Label htmlFor="auth-agree1">이용약관 동의</Label>
         <Atag>내용보기</Atag>
       </FormElement>
       <FormElement>
-        <FormCheck type="checkbox" id="auth-agree2" />
+        <FormCheck type="checkbox" name="check2" checked={check2} onChange={onCheckboxChange} id="auth-agree2" />
         <Label htmlFor="auth-agree2">개인정보 수집 및 이용에 대한 동의</Label>
         <Atag>내용보기</Atag>
       </FormElement>
       <FormElement>
-        <FormCheck type="checkbox" id="auth-agree3" />
+        <FormCheck type="checkbox" name="check3" checked={check3} onChange={onCheckboxChange} id="auth-agree3" />
         <Label htmlFor="auth-agree3">개인정보 수집 및 이용안내</Label>
         <Atag>내용보기</Atag>
       </FormElement>
       <FormElement>
-        <FormCheck type="checkbox" id="auth-agree4" />
+        <FormCheck type="checkbox" checked={checkAll} onChange={onCheckboxAllChange} id="auth-agree4" />
         <Label htmlFor="auth-agree4">
           사이트 이용을 위한 이용약관, 개인정보 수집 및 이용에 모두 동의합니다.
         </Label>

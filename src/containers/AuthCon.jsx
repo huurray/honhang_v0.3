@@ -16,7 +16,11 @@ class AuthCon extends Component {
     kakaoId: '',
     kakaoBigImg: '',
     kakaoSmallImg: '',
-    isKakaoLogin: false
+    isKakaoLogin: false,
+    check1: false,
+    check2: false,
+    check3: false,
+    checkAll: false
   };
 
   onHandleChange = e => {
@@ -55,6 +59,25 @@ class AuthCon extends Component {
     });
   };
 
+  //checkbox all
+  onCheckboxChange = (e) => {
+    this.setState({ [e.target.name]: e.target.checked });
+  };
+  onCheckboxAllChange = () => {
+    const { checkAll } = this.state;
+    this.setState({ checkAll: !checkAll });
+    if(checkAll){
+      this.setState({ check1: false, check2: false, check3: false });
+    } else {
+      this.setState({ check1: true, check2: true, check3: true });
+    }
+  };
+
+  //check form
+  // onCheckForm = () => {
+
+  // }
+
   onInsert = () => {
     const {
       name,
@@ -83,7 +106,7 @@ class AuthCon extends Component {
   }
 
   render() {
-    const { isKakaoLogin } = this.state;
+    const { isKakaoLogin, check1, check2, check3, checkAll } = this.state;
     return (
       <Fragment>
         <PageNav
@@ -99,6 +122,12 @@ class AuthCon extends Component {
           onHandleChange={this.onHandleChange}
           onInsert={this.onInsert}
           isKakaoLogin={isKakaoLogin}
+          check1={check1}
+          check2={check2}
+          check3={check3}
+          checkAll={checkAll}
+          onCheckboxChange={this.onCheckboxChange}
+          onCheckboxAllChange={this.onCheckboxAllChange}
         />
       </Fragment>
     );

@@ -17,8 +17,8 @@ const DetailModal = styled.div`
 const DetailContent = styled.div`
   position: absolute;
   top: 0;
-  right: ${props => props.on ? "0" : "-60rem"}
-  display: ${props => props.on ? "1" : "0"}
+  right: ${props => (props.on ? '0' : '-60rem')}
+  display: ${props => (props.on ? '1' : '0')}
   width: 100%;
   height: 100%;
   display: block;
@@ -73,61 +73,49 @@ const KakaoId = styled.div`
 `;
 
 class BoardDetail extends Component {
-
-
   allDetailShow = () => {
     const { dataList, selectIndex } = this.props;
 
     return dataList.data.map((list, i) => {
       return (
-        <DetailContent key={i} on={i===selectIndex}>
-            <DetailH1>
-              <DetailTitle>제목.</DetailTitle>
-              {list.title}
-            </DetailH1>
-            <DetailRow>
-              <DetailH3>
-                <DetailTitle>여행지.</DetailTitle>
-                {list.place}
-              </DetailH3>
-              <DetailH3>
-                <DetailTitle>도시.</DetailTitle>
-                {list.city}
-              </DetailH3>
-            </DetailRow>
-            <DetailRow>
-              <DetailH3>
-                <DetailTitle>날짜.</DetailTitle>
-                {list.date}
-              </DetailH3>
-              <DetailH3>
-                <DetailTitle>시간.</DetailTitle>
-                {list.time}
-              </DetailH3>
-            </DetailRow>
+        <DetailContent key={i} on={i === selectIndex}>
+          <DetailH1>
+            <DetailTitle>제목.</DetailTitle>
+            {list.title}
+          </DetailH1>
+          <DetailRow>
+            <DetailH3>
+              <DetailTitle>여행지.</DetailTitle>
+              {list.place}
+            </DetailH3>
+            <DetailH3>
+              <DetailTitle>날짜.</DetailTitle>
+              {list.date}
+            </DetailH3>
+          </DetailRow>
+          <DetailRow>
             <DetailH3>
               <DetailTitle>최대인원.</DetailTitle>
               {list.howMany}
             </DetailH3>
-            <DetailP>
-              <DetailTitle>내용.</DetailTitle>
-              {list.content}
-            </DetailP>
-            <DetailAbsol>
-              <DetailTitle>카카오톡ID.</DetailTitle>
-              <KakaoId>{list.kakao}</KakaoId>
-            </DetailAbsol>
-          </DetailContent>
-      )
-    })
-  }
+          </DetailRow>
+          <DetailP>
+            <DetailTitle>내용.</DetailTitle>
+            {list.content}
+          </DetailP>
+          <DetailAbsol>
+            <DetailTitle>카카오톡ID.</DetailTitle>
+            <KakaoId>{list.kakao}</KakaoId>
+          </DetailAbsol>
+        </DetailContent>
+      );
+    });
+  };
 
   render() {
     return (
       <Detail>
-        <DetailModal>
-          {this.allDetailShow()}
-        </DetailModal>
+        <DetailModal>{this.allDetailShow()}</DetailModal>
       </Detail>
     );
   }

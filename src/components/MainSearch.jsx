@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+//datepicker
+import '../common/datepicker.css';
+import { SingleDatePicker } from 'react-dates';
+import 'react-dates/initialize';
+
+import SideModal from '../common/SideModal';
 import { SpecialButton } from '../styles/ui';
 
 const Section = styled.section`
@@ -62,6 +68,7 @@ const SearchInput = styled.input`
   display: block;
   outline: none;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
+  border-bottom: 2px solid transparent;
   &::-webkit-input-placeholder {
     color: ${props => props.theme.colors.GREY_DARK_1};
   }
@@ -84,11 +91,28 @@ class MainSearch extends Component {
   };
 
   render() {
-    const { onInsert, placeKeyword, onHandleChange } = this.props;
+    const {
+      onInsert,
+      placeKeyword,
+      date,
+      focused,
+      onDateChange,
+      onFocusChange,
+      onHandleChange,
+      onHandleKeyPress,
+      modalText,
+      modalState,
+      hideSideModal
+    } = this.props;
 
     return (
       <Section>
         <BgImgBox>{this.bgImgList()}</BgImgBox>
+        <SideModal
+          text={modalText}
+          modalState={modalState}
+          hideSideModal={hideSideModal}
+        />
         <MainSearchBox>
           <SearchText white>
             외롭지않은 홀로 여행, 동행을 찾아보세요.
@@ -100,17 +124,29 @@ class MainSearch extends Component {
                 type="text"
                 onChange={onHandleChange}
                 value={placeKeyword}
+                onKeyPress={onHandleKeyPress}
                 placeholder="에펠탑"
                 autocomplete="off"
               />
             </SearchElement>
             <SearchElement>
               <SearchLabel white>날짜</SearchLabel>
-              <SearchInput type="text" placeholder="2020/07/19" readonly />
+              <SingleDatePicker
+                date={date}
+                onDateChange={date => onDateChange(date)}
+                focused={focused}
+                onFocusChange={({ focused }) => onFocusChange(focused)}
+                placeholder="19/07/2019"
+                id="main"
+                required
+                readOnly
+              />
             </SearchElement>
             <SearchElement>
               <SearchLabel white>&nbsp;</SearchLabel>
-              <SpecialButton full onClick={onInsert}>검색하기</SpecialButton>
+              <SpecialButton full onClick={onInsert}>
+                검색하기
+              </SpecialButton>
             </SearchElement>
           </Search>
         </MainSearchBox>

@@ -1,0 +1,12 @@
+[debug] [2018-08-17T08:22:43.446Z] ----------------------------------------------------------------------
+[debug] [2018-08-17T08:22:43.448Z] Command:       D:\ALL\Node js\node.exe C:\Users\JUNHYEOK HEO\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy --only functions
+[debug] [2018-08-17T08:22:43.448Z] CLI Version:   4.1.1
+[debug] [2018-08-17T08:22:43.448Z] Platform:      win32
+[debug] [2018-08-17T08:22:43.448Z] Node Version:  v8.11.2
+[debug] [2018-08-17T08:22:43.449Z] Time:          Fri Aug 17 2018 17:22:43 GMT+0900 (대한민국 표준시)
+[debug] [2018-08-17T08:22:43.449Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-08-17T08:22:43.461Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-08-17T08:22:43.461Z] > authorizing via signed-in user
+[debug] [2018-08-17T08:22:43.464Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/honghang-7ba3f  
+ 

@@ -1,13 +1,37 @@
 import React from 'react';
+import styled from 'styled-components';
 import BoardCon from '../containers/BoardCon';
+import HeaderNavBarCon from '../containers/HeaderNavBarCon';
 
+const PageContainer = styled.main`
+  overflow: hidden;
+`;
+const Section = styled.main`
+  width: 80%;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 12rem 0 8rem 0;
+  overflow: hidden;
+  position: relative;
+`;
+const BgImage = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+`;
 
-const Board = () => {
+const Board = ({history}) => {
   return (
-    <div>
-      <div>보드페이지</div>
-      <BoardCon />
-    </div>
+    <PageContainer>
+      <BgImage src={require('../common/img/board-back.jpg')} alt="board-back" />
+      <Section>
+        <HeaderNavBarCon history={history} />
+        <BoardCon history={history} />
+      </Section>
+    </PageContainer>
   );
 };
 

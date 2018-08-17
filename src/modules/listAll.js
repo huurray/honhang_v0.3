@@ -6,9 +6,11 @@ import firebase from 'firebase';
 function getListAll() {
   const db = firebase.firestore();
   const docRef = db.collection('donghang');
-  
+  const date = new Date();
+  const currentDate = date.getTime();
   let dataList = [];
-  return docRef.orderBy("dateNum").get().then(function(querySnapshot) {
+  
+  return docRef.where("dateNum", ">", currentDate).orderBy("dateNum").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
       let data = doc.data();
 

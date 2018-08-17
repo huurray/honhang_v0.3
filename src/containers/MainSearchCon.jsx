@@ -5,13 +5,22 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as searchActions from '../modules/search';
-import * as inputActions from '../modules/input';
 
 class MainSearchCon extends Component {
   state = {
+    //image slider
     imgArray: [null, null, null],
     imgNum: 1,
-    imageLen: 3
+    imageLen: 3,
+    //search
+    searchValue: '',
+    //datepicker
+    date: null,
+    dateNum: 0,
+    focused: false,
+    //modal
+    modalText: '',
+    modalState: false
   };
 
   //image slide
@@ -25,37 +34,82 @@ class MainSearchCon extends Component {
     }
   };
 
-  //searchValue dispatch
-
   onHandleChange = e => {
-    const { inputActions } = this.props;
-    inputActions.inputPlaceKeyword(e.target.value);
+    this.setState({ searchValue: e.target.value });
+  };
+
+  onDateChange = date => {
+    this.setState({ date, dateNum: date._d.getTime() });
+  };
+
+  onFocusChange = focused => {
+    this.setState({ focused });
+  };
+
+  hideSideModal = () => {
+    this.setState({ modalState: false });
+  };
+
+  onHandleKeyPress = e => {
+    if (e.key === 'Enter') {
+      this.onInsert();
+    }
   };
 
   onInsert = () => {
-    const { history } = this.props;
+    const { history, searchActions } = this.props;
+    const { searchValue } = this.state;
 
-    const { searchActions, placeKeyword } = this.props;
-    searchActions.search(placeKeyword);
-    history.push('/board');
-
+    if (searchValue === '') {
+      this.setState({
+        modalState: true,
+        modalText: '검색어를 입력해주세요!'
+      });
+    } else {
+      searchActions.search(searchValue);
+      history.push('/board');
+    }
   };
 
   componentDidMount() {
     setInterval(this.onImageSlide, 10000);
   }
 
+  componentWillUnmount() {
+    clearInterval(this.onImageSlide);
+  }
+
   render() {
-    const { imgNum, imgArray } = this.state;
-    const { placeKeyword } = this.props;
+    const {
+      imgNum,
+      imgArray,
+      searchValue,
+      date,
+      focused,
+      modalText,
+      modalState
+    } = this.state;
 
     return (
       <div>
         <MainSearch
+          //image slider
           imgNum={imgNum}
           imgArray={imgArray}
-          placeKeyword={placeKeyword}
+          //search
           onHandleChange={this.onHandleChange}
+          placeKeyword={searchValue}
+          //datepicker
+          date={date}
+          focused={focused}
+          onDateChange={this.onDateChange}
+          onFocusChange={this.onFocusChange}
+          //modal
+          modalText={modalText}
+          modalState={modalState}
+          hideSideModal={this.hideSideModal}
+          //etc
+          onHandleKeyPress={this.onHandleKeyPress}
           onInsert={this.onInsert}
         />
       </div>
@@ -63,12 +117,9 @@ class MainSearchCon extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  placeKeyword: state.input.get('placeKeyword')
-});
+const mapStateToProps = state => ({});
 const mapDispatchToProps = dispatch => ({
-  inputActions: bindActionCreators(inputActions, dispatch),
-  searchActions: bindActionCreators(searchActions, dispatch),
+  searchActions: bindActionCreators(searchActions, dispatch)
 });
 
 export default connect(

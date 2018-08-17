@@ -29,7 +29,7 @@ const BoardAll = ({ history }) => {
       <BgImage src={require('../common/img/board-back.jpg')} alt="board-back" />
       <Section>
         <HeaderNavBarCon history={history} />
-        <BoardAllCon />
+        <BoardAllCon history={history} />
       </Section>
     </PageContainer>
   );

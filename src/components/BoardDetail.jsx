@@ -102,8 +102,8 @@ class BoardDetail extends Component {
           <DetailP>
             <DetailTitle>내용.</DetailTitle>
             {/* 줄바꿈 표현 */}
-            {list.content.split('\n').map(line => (
-              <span>
+            {list.content.split('\n').map((line, i) => (
+              <span key={i}>
                 {line}
                 <br />
               </span>
@@ -117,7 +117,7 @@ class BoardDetail extends Component {
       );
     });
   };
-
+  
   render() {
     return (
       <Detail>

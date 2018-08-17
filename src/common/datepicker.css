@@ -27,11 +27,10 @@
 }
 .SingleDatePickerInput {
   display: inline-block;
-  background-color: #fff
+  font-family: 'Noto Sans KR',sans-serif !important;
 }
 .SingleDatePickerInput__withBorder {
   border-radius: 2px;
-  border: 1px solid #dbdbdb
 }
 .SingleDatePickerInput__rtl {
   direction: rtl
@@ -601,12 +600,28 @@
 .DateInput {
   margin: 0;
   padding: 0;
-  background: #fff;
   position: relative;
   display: inline-block;
-  width: 40rem;
-  vertical-align: middle
+  vertical-align: middle;
+  border: 1px solid transparent;
 }
+
+#main {
+  width: 100% !important;
+  height: 4.8rem !important;
+  border: 0 !important;
+  border-radius: 1.5rem !important;
+  background-color: #fff !important;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3) !important;
+}
+#research {
+  width: 20.8rem !important;
+  border-radius: 0.5rem !important;
+  border: 0 !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: white;
+}
+
 .DateInput__small {
   width: 97px
 }
@@ -619,18 +634,14 @@
 }
 .DateInput_input {
   font-weight: 200;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 24px;
   color: #484848;
   background-color: #fff;
-  width: 100%;
-  padding: 11px 11px 9px;
-  border: 0;
-  border-top: 0;
-  border-right: 0;
-  border-bottom: 2px solid transparent;
-  border-left: 0;
-  border-radius: 0
+  width: 39.8rem;
+  padding: 11px;
+  border: 1px solid lightgrey;
+  
 }
 .DateInput_input::placeholder {
   color: #ccc;
@@ -653,11 +664,10 @@
 .DateInput_input__focused {
   outline: 0;
   background: #fff;
-  border: 0;
-  border-top: 0;
-  border-right: 0;
+  border-top: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
   border-bottom: 2px solid #9966ff;
-  border-left: 0
+  border-left: 1px solid lightgrey;
 }
 .DateInput_input__disabled {
   background: #f2f2f2;

@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as listAllActions from '../modules/listAll';
+import * as searchActions from '../modules/search';
 
 const Container = styled.div`
   width: 100%;
@@ -18,7 +19,14 @@ const Container = styled.div`
 
 class BoardAllCon extends Component {
   state = {
-    selectIndex: -1
+    selectIndex: -1,
+    isResearch: false,
+    reSearchValue: '',
+    date: null,
+    dateNum: 0,
+    focused: false,
+    modalText: '',
+    modalState: false
   };
 
   getlists = () => {
@@ -26,22 +34,91 @@ class BoardAllCon extends Component {
     listAllActions.listUpAll();
   };
 
-  componentDidMount() {
-    this.getlists();
-  }
-
   onSelect = i => {
     this.setState({ selectIndex: i });
   };
 
+  toggleResearch = () => {
+    const { isResearch } = this.state;
+    this.setState({ isResearch: !isResearch });
+  };
+
+  onHandleChange = e => {
+    this.setState({ reSearchValue: e.target.value });
+  };
+
+  onDateChange = date => {
+    this.setState({ date, dateNum: date._d.getTime() });
+  };
+
+  onFocusChange = focused => {
+    this.setState({ focused });
+  };
+
+  onHandleKeyPress = e => {
+    if (e.key === 'Enter') {
+      this.onInsert();
+    }
+  };
+
+  hideSideModal = () => {
+    this.setState({ modalState: false });
+  };
+
+  onInsert = () => {
+    const { history, searchActions } = this.props;
+    const { reSearchValue } = this.state;
+
+    if (reSearchValue === '') {
+      this.setState({
+        modalState: true,
+        modalText: '검색어를 입력해주세요!'
+      });
+    } else {
+      searchActions.search(reSearchValue);
+      history.push('/board');
+    }
+  };
+
+  componentDidMount() {
+    this.getlists();
+  }
+
   render() {
     const { dataList } = this.props;
-    const { selectIndex } = this.state;
+    const {
+      selectIndex,
+      isResearch,
+      reSearchValue,
+      date,
+      focused,
+      modalText,
+      modalState
+    } = this.state;
 
     return (
       <Container>
         {dataList.loading && <Loading top />}
-        <BoardSort />
+        <BoardSort
+          //research
+          isResearch={isResearch}
+          toggleResearch={this.toggleResearch}
+          //search
+          onHandleChange={this.onHandleChange}
+          placeKeyword={reSearchValue}
+          //datepicker
+          date={date}
+          focused={focused}
+          onDateChange={this.onDateChange}
+          onFocusChange={this.onFocusChange}
+          //modal
+          modalText={modalText}
+          modalState={modalState}
+          hideSideModal={this.hideSideModal}
+          //etc
+          onHandleKeyPress={this.onHandleKeyPress}
+          onInsert={this.onInsert}
+        />
         <BoardList dataList={dataList} onSelect={this.onSelect} />
         <BoardDetail dataList={dataList} selectIndex={selectIndex} />
       </Container>
@@ -53,7 +130,8 @@ const mapStateToProps = state => ({
   dataList: state.listAll.toJS()
 });
 const mapDispatchToProps = dispatch => ({
-  listAllActions: bindActionCreators(listAllActions, dispatch)
+  listAllActions: bindActionCreators(listAllActions, dispatch),
+  searchActions: bindActionCreators(searchActions, dispatch)
 });
 
 export default connect(

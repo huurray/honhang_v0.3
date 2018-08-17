@@ -3,6 +3,7 @@ import MakeUpForm from '../components/MakeUpForm';
 import PageNav from '../components/PageNav';
 
 import firebase from 'firebase';
+import { connect } from 'react-redux';
 
 class MakeUpCon extends Component {
   state = {
@@ -13,7 +14,9 @@ class MakeUpCon extends Component {
     kakao: '',
     date: null,
     dateNum: 0,
-    focused: false
+    focused: false,
+    modalState: false,
+    modalText: ''
   };
 
   onHandleChange = e => {
@@ -30,34 +33,72 @@ class MakeUpCon extends Component {
     this.setState({ focused });
   };
 
+  hideSideModal = () => {
+    this.setState({ modalState: false });
+  };
+
+  //textarea 줄바꿈 제한
+  onHandleKeyDown = () => {
+    const { content } = this.state;
+    const rows = content.split('\n').length;
+    const maxRows = 12;
+
+    if (rows > maxRows) {
+      let modifiedText = content.split('\n').slice(0, maxRows);
+      this.setState({
+        modalState: true,
+        modalText: '글이 너무 길면 읽기 힘들어요 ㅠ',
+        content: modifiedText.join('\n')
+      });
+    }
+  };
+
   onInsert = () => {
     const db = firebase.firestore();
     const docRef = db.collection('donghang');
 
-    const { title, place, howMany, content, kakao, date } = this.state;
+    const { title, place, howMany, content, date } = this.state;
+    const { userData, history } = this.props;
 
-    const dateLiteral = `${date._d.getFullYear()}/${date._d.getMonth()+1}/${date._d.getDate()}`;
-
-    docRef
-      .add({
-        title,
-        place,
-        howMany,
-        content,
-        kakao,
-        date: dateLiteral,
-        dateNum: date._d.getTime()
-      })
-      .then(function(docRef) {
-        console.log('Document written with ID: ', docRef.id);
-      })
-      .catch(function(error) {
-        console.error('Error adding document: ', error);
+    //check fill form
+    if (
+      title === '' ||
+      place === '' ||
+      howMany === 0 ||
+      content === '' ||
+      date === null
+    ) {
+      this.setState({
+        modalState: true,
+        modalText: '동행정보를 모두 기입해주세요.'
       });
+    } else {
+      const d = date._d;
+      const dateLit = `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
+
+      docRef
+        .add({
+          title,
+          place,
+          howMany,
+          content,
+          kakao: userData.kakaoId,
+          date: dateLit,
+          dateNum: date._d.getTime()
+        })
+        .then(function(docRef) {
+          console.log('Document written with ID: ', docRef.id);
+          history.replace('/boardall');
+        })
+        .catch(function(error) {
+          console.error('Error adding document: ', error);
+        });
+    }
   };
 
   render() {
-    const { date, focused } = this.state;
+    const { content, date, focused, modalState, modalText } = this.state;
+    const { userData } = this.props;
 
     return (
       <Fragment>
@@ -70,16 +111,26 @@ class MakeUpCon extends Component {
           secondImg="icon-document-active"
         />
         <MakeUpForm
+          content={content}
           date={date}
           focused={focused}
           onDateChange={this.onDateChange}
           onFocusChange={this.onFocusChange}
           onHandleChange={this.onHandleChange}
           onInsert={this.onInsert}
+          kakaoId={userData.kakaoId}
+          modalState={modalState}
+          modalText={modalText}
+          hideSideModal={this.hideSideModal}
+          onHandleKeyDown={this.onHandleKeyDown}
         />
       </Fragment>
     );
   }
 }
 
-export default MakeUpCon;
+const mapStateToProps = state => ({
+  userData: state.user.toJS().data
+});
+
+export default connect(mapStateToProps)(MakeUpCon);

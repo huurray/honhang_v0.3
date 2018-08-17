@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import HeaderNavBarCon from '../containers/HeaderNavBarCon';
@@ -13,18 +13,21 @@ const PageContainer = styled.main`
   position: relative;
 `;
 
-const Main = ({history}) => {
+class Main extends Component {
 
-  return (
-    <PageContainer>
-      <HeaderNavBarCon history={history} />
-      <MainSearchCon history={history} />
-      <MainComment />
-      <MainCategory />
-      <MainSocial />
-      <Footer />
-    </PageContainer>
-  );
-};
+  render() {
+    const { history } = this.props;
+    return (
+      <PageContainer>
+        <HeaderNavBarCon history={history} />
+        <MainSearchCon history={history} />
+        <MainComment />
+        <MainCategory />
+        <MainSocial />
+        <Footer />
+      </PageContainer>
+    );
+  }
+}
 
 export default Main;

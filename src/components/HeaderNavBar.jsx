@@ -9,7 +9,7 @@ const Section = styled.section`
   top: 0;
   left: 0;
   padding: 3rem 10%;
-  z-index: 9;
+  z-index: 999;
   box-shadow: ${props => props.on && '0 1rem 1.5rem rgba(0,0,0, 0.1)'};
   background-color: ${props => props.on && '#fff'};
 `;
@@ -55,7 +55,7 @@ const ProfileContent = styled.div`
   background-color: ${props => props.theme.colors.WHITE};
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
   border: 1px solid ${props => props.theme.colors.GREY_LIGHT_3};
-  opacity: ${props => props.on ? '1' : '0'};
+  opacity: ${props => (props.on ? '1' : '0')};
 `;
 const ProfileText = styled.div`
   ${props => props.theme.font.para_secondary};
@@ -80,6 +80,12 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const StyledNotLink = styled.div`
+  float: left;
+  cursor: pointer;
+  margin-right: 3rem;
+`;
+
 const HeaderNavBar = ({
   logoImg,
   iconUser,
@@ -89,7 +95,8 @@ const HeaderNavBar = ({
   isProfileOn,
   history,
   loginStatus,
-  toggleLogin
+  toggleLogin,
+  hasUserData
 }) => {
   return (
     <Section on={onScrollDown}>
@@ -109,11 +116,11 @@ const HeaderNavBar = ({
             동행 리스트
           </NavList>
         </StyledLink>
-        <StyledLink to="/makeup">
+        <StyledNotLink onClick={hasUserData}>
           <NavListToMake primary_light on={onScrollDown}>
             동행 모집
           </NavListToMake>
-        </StyledLink>
+        </StyledNotLink>
         <NavList white>
           <ProfileBox onClick={onClickProfile}>
             <ProfileImg src={require(`../common/img/${iconUser}.png`)} />

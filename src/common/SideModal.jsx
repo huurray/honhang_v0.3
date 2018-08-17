@@ -1,19 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SideModalBox = styled.div`
-  width: 100%;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: transparent;
-  display: ${props => props.on ? "block" : "none"};
-`;
 const Modal = styled.div`
-  position: absolute;
-  top: 15%;
-  right: ${props => props.on ? "3rem" : "-35rem"};
+  display: ${props => (props.on ? 'block' : 'none')};
+  z-index: 99;
+  position: fixed;
+  top: 16%;
+  right: ${props => (props.on ? '3rem' : '-35rem')};
   transition: all 1s;
   width: 32rem;
   height: 6rem;
@@ -47,15 +40,13 @@ const Closer = styled.div`
   cursor: pointer;
 `;
 
-const SideModal = ({text, modalState, hideSideModal}) => {
+const SideModal = ({ text, modalState, hideSideModal }) => {
   return (
-    <SideModalBox on={modalState}>
-      <Modal on={modalState}>
-        <Img src={require('./img/icon-info.png')} alt="icon-info" />
-        <Text>{text}</Text>
-        <Closer onClick={hideSideModal}>&times;</Closer>
-      </Modal>
-    </SideModalBox>
+    <Modal on={modalState}>
+      <Img src={require('./img/icon-info.png')} alt="icon-info" />
+      <Text>{text}</Text>
+      <Closer onClick={hideSideModal}>&times;</Closer>
+    </Modal>
   );
 };
 

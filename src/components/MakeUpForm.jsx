@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
+//datepicker
 import '../common/datepicker.css';
 import { SingleDatePicker } from 'react-dates';
 import 'react-dates/initialize';
+
+import SideModal from '../common/SideModal';
 import { SpecialButton } from '../styles/ui/buttons';
 
 const FormContainer = styled.div`
@@ -49,7 +52,7 @@ const FormInput = styled.input`
     border-bottom: 2px solid ${props => props.theme.colors.TERIARY};
   }
 `;
-const FormTextarea = styled.input`
+const FormTextarea = styled.textarea`
   ${props => props.theme.font.para_tertiary};
   width: 80%;
   height: 20rem;
@@ -72,14 +75,25 @@ const FormButtonBox = styled.div`
 
 const MakeUpForm = ({
   onHandleChange,
+  content,
   date,
   focused,
   onDateChange,
   onFocusChange,
-  onInsert
+  onInsert,
+  kakaoId,
+  modalState,
+  modalText,
+  hideSideModal,
+  onHandleKeyDown
 }) => {
   return (
     <FormContainer>
+      <SideModal
+        modalState={modalState}
+        text={modalText}
+        hideSideModal={hideSideModal}
+      />
       <FormElement>
         <FormText>제목</FormText>
         <FormInput
@@ -111,6 +125,7 @@ const MakeUpForm = ({
           onFocusChange={({ focused }) => onFocusChange(focused)}
           placeholder="19/07/2019"
           required
+          readOnly
         />
       </FormElement>
       <FormElement>
@@ -131,8 +146,10 @@ const MakeUpForm = ({
           name="kakao"
           placeholder="내 카카오톡 ID"
           onChange={onHandleChange}
+          value={kakaoId}
           autoComplete="off"
           required
+          readOnly
         />
       </FormElement>
       <FormElement>
@@ -143,6 +160,8 @@ const MakeUpForm = ({
           onChange={onHandleChange}
           maxlength="200"
           placeholder="하고싶은 말을 적어주세요~"
+          onKeyDown={onHandleKeyDown}
+          value={content}
           autoComplete="off"
           required
         />

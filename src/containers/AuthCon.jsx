@@ -20,7 +20,9 @@ class AuthCon extends Component {
     check1: false,
     check2: false,
     check3: false,
-    checkAll: false
+    checkAll: false,
+    modalState: false,
+    modalText: ''
   };
 
   onHandleChange = e => {
@@ -30,10 +32,12 @@ class AuthCon extends Component {
   };
   //카카오 API window로 접근
   getKakaoInfo = () => {
-    let Component = this;
-
+    //이니셜라이즈 중복을 피해주기 위함임
+    window.Kakao.cleanup();
     window.Kakao.init('ebc7930ec309165c494faf3f9e0837a2');
+
     // 카카오 로그인 버튼을 생성합니다.
+    let Component = this;
     window.Kakao.Auth.createLoginButton({
       container: '#kakao-login-btn',
       success: function(authObj) {
@@ -60,23 +64,22 @@ class AuthCon extends Component {
   };
 
   //checkbox all
-  onCheckboxChange = (e) => {
+  onCheckboxChange = e => {
     this.setState({ [e.target.name]: e.target.checked });
   };
   onCheckboxAllChange = () => {
     const { checkAll } = this.state;
     this.setState({ checkAll: !checkAll });
-    if(checkAll){
+    if (checkAll) {
       this.setState({ check1: false, check2: false, check3: false });
     } else {
       this.setState({ check1: true, check2: true, check3: true });
     }
   };
 
-  //check form
-  // onCheckForm = () => {
-
-  // }
+  hideSideModal = () => {
+    this.setState({ modalState: false });
+  };
 
   onInsert = () => {
     const {
@@ -86,19 +89,46 @@ class AuthCon extends Component {
       phone,
       kakaoId,
       kakaoBigImg,
-      kakaoSmallImg
+      kakaoSmallImg,
+      check1,
+      check2,
+      check3
     } = this.state;
-    const { userActions } = this.props;
-
-    userActions.postUser(
-      name,
-      age,
-      city,
-      phone,
-      kakaoId,
-      kakaoBigImg,
-      kakaoSmallImg
-    );
+    const { userActions, history } = this.props;
+    //check fill form
+    if (
+      name === '' ||
+      age === 0 ||
+      city === '' ||
+      phone === '' ||
+      kakaoId === ''
+    ) {
+      this.setState({
+        modalState: true,
+        modalText: '신상정보를 모두 기입해주세요.'
+      });
+    } else if (kakaoBigImg === '') {
+      this.setState({
+        modalState: true,
+        modalText: '카카오 프로필 연동을 해주세요.'
+      });
+    } else if (check1 === false || check2 === false || check3 === false) {
+      this.setState({
+        modalState: true,
+        modalText: '약관에 모두 동의 해주세요.'
+      });
+    } else {
+      userActions.postUser(
+        name,
+        age,
+        city,
+        phone,
+        kakaoId,
+        kakaoBigImg,
+        kakaoSmallImg
+      );
+      history.push('/makeup');
+    }
   };
 
   componentDidMount() {
@@ -106,7 +136,15 @@ class AuthCon extends Component {
   }
 
   render() {
-    const { isKakaoLogin, check1, check2, check3, checkAll } = this.state;
+    const {
+      isKakaoLogin,
+      check1,
+      check2,
+      check3,
+      checkAll,
+      modalState,
+      modalText
+    } = this.state;
     return (
       <Fragment>
         <PageNav
@@ -128,6 +166,9 @@ class AuthCon extends Component {
           checkAll={checkAll}
           onCheckboxChange={this.onCheckboxChange}
           onCheckboxAllChange={this.onCheckboxAllChange}
+          modalState={modalState}
+          modalText={modalText}
+          hideSideModal={this.hideSideModal}
         />
       </Fragment>
     );
@@ -135,8 +176,7 @@ class AuthCon extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.user.toJS().data,
-  loading: state.user.get('loading')
+  data: state.user.toJS().data
 });
 const mapDispatchToProps = dispatch => ({
   userActions: bindActionCreators(userActions, dispatch)

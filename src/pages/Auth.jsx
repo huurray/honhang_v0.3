@@ -11,7 +11,7 @@ const Auth = ({ history }) => {
   return (
     <PageContainer>
       <HeaderNavBarCon isBlack={true} history={history} />
-      <AuthCon />
+      <AuthCon history={history} />
     </PageContainer>
   );
 };

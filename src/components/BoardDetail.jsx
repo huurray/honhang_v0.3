@@ -101,7 +101,13 @@ class BoardDetail extends Component {
           </DetailRow>
           <DetailP>
             <DetailTitle>내용.</DetailTitle>
-            {list.content}
+            {/* 줄바꿈 표현 */}
+            {list.content.split('\n').map(line => (
+              <span>
+                {line}
+                <br />
+              </span>
+            ))}
           </DetailP>
           <DetailAbsol>
             <DetailTitle>카카오톡ID.</DetailTitle>

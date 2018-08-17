@@ -11,7 +11,7 @@ const MakeUp = ({ history }) => {
   return (
     <PageContainer>
       <HeaderNavBarCon isBlack={true} history={history} />
-      <MakeUpCon />
+      <MakeUpCon history={history} />
     </PageContainer>
   );
 };

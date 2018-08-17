@@ -83,13 +83,17 @@ const AuthForm = ({
   check3,
   checkAll,
   onCheckboxChange,
-  onCheckboxAllChange
+  onCheckboxAllChange,
+  modalState,
+  modalText,
+  hideSideModal
 }) => {
   return (
     <FormContainer>
       <SideModal 
-        modalState
-        text="sdfsdfsd"
+        modalState={modalState}
+        text={modalText}
+        hideSideModal={hideSideModal}
       />
       <FormElement>
         <FormText>이름</FormText>

@@ -8,7 +8,6 @@ import { bindActionCreators } from 'redux';
 import * as statusActions from '../modules/status';
 import * as userActions from '../modules/user';
 
-
 class HeaderNavBarCon extends Component {
   state = {
     isBlack: this.props.isBlack,
@@ -16,20 +15,20 @@ class HeaderNavBarCon extends Component {
     logoImg: 'logo-white',
     iconUser: 'icon-user-white',
     downArrow: 'down-arrow',
-    onScrollDown: false,
+    onScrollDown: false
   };
 
   componentWillMount() {
     const { statusActions, userActions } = this.props;
     //로그인 상태 체크
     statusActions.isLogin();
-    //유저 정보 가져오기
+    //유저정보 가져오기
     userActions.getUser();
   }
 
   onClickProfile = () => {
     this.setState({ profile: !this.state.profile });
-  }
+  };
 
   toggleColorBlack = () => {
     this.setState({
@@ -50,15 +49,32 @@ class HeaderNavBarCon extends Component {
   };
 
   toggleLogin = () => {
-    const {loginStatus,statusActions, history} = this.props;
-    if(loginStatus === "로그인") {
-      history.push('/signin')
-    } else if (loginStatus === "로그아웃") {
-      firebase.auth().signOut().then(function () {
-        statusActions.isLogin();
-      });
+    const { loginStatus, statusActions, history, userActions } = this.props;
+    if (loginStatus === '로그인') {
+      history.push('/signin');
+    } else if (loginStatus === '로그아웃') {
+      firebase
+        .auth()
+        .signOut()
+        .then(function() {
+          statusActions.isLogin();
+          userActions.getUser();
+        });
     }
-  }
+  };
+
+  hasUserData = () => {
+    const { userData, loginStatus, history } = this.props;
+    if (loginStatus === '로그인') {
+      history.push('/signin');
+    } else if (loginStatus === '로그아웃') {
+      if (userData.name === undefined) {
+        history.push('/auth');
+      } else {
+        history.push('/makeup');
+      }
+    }
+  };
 
   componentDidMount() {
     //change NavBar on Scroll Event
@@ -84,7 +100,7 @@ class HeaderNavBarCon extends Component {
   render() {
     const { logoImg, iconUser, downArrow, onScrollDown, profile } = this.state;
     const { history, loginStatus } = this.props;
-    
+
     return (
       <div>
         <HeaderNavBar
@@ -97,6 +113,7 @@ class HeaderNavBarCon extends Component {
           history={history}
           loginStatus={loginStatus}
           toggleLogin={this.toggleLogin}
+          hasUserData={this.hasUserData}
         />
       </div>
     );
@@ -104,7 +121,8 @@ class HeaderNavBarCon extends Component {
 }
 
 const mapStateToProps = state => ({
-  loginStatus: state.status.get("loginStatus")
+  loginStatus: state.status.get('loginStatus'),
+  userData: state.user.toJS().data
 });
 const mapDispatchToProps = dispatch => ({
   statusActions: bindActionCreators(statusActions, dispatch),

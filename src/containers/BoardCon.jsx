@@ -82,7 +82,7 @@ class BoardCon extends Component {
   componentDidMount() {
     const { searchValue, listActions } = this.props;
     listActions.listUp(searchValue);
-    console.log(searchValue)
+    console.log(searchValue);
   }
 
   render() {
@@ -96,6 +96,8 @@ class BoardCon extends Component {
       modalText,
       modalState
     } = this.state;
+    
+    console.log(searchValue);
 
     return (
       <Container>

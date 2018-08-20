@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import * as statusActions from '../modules/status';
 import * as userActions from '../modules/user';
+import * as listAllActions from '../modules/listAll';
 
 class HeaderNavBarCon extends Component {
   state = {
@@ -18,12 +19,9 @@ class HeaderNavBarCon extends Component {
     onScrollDown: false
   };
 
-  componentWillMount() {
-    const { statusActions, userActions } = this.props;
-    //로그인 상태 체크
-    statusActions.isLogin();
-    //유저정보 가져오기
-    userActions.getUser();
+  getListAll = () => {
+    const { listAllActions } = this.props;
+    listAllActions.listUpAll();
   }
 
   onClickProfile = () => {
@@ -114,6 +112,7 @@ class HeaderNavBarCon extends Component {
           loginStatus={loginStatus}
           toggleLogin={this.toggleLogin}
           hasUserData={this.hasUserData}
+          getListAll={this.getListAll}
         />
       </div>
     );
@@ -126,7 +125,8 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   statusActions: bindActionCreators(statusActions, dispatch),
-  userActions: bindActionCreators(userActions, dispatch)
+  userActions: bindActionCreators(userActions, dispatch),
+  listAllActions: bindActionCreators(listAllActions, dispatch)
 });
 
 export default connect(

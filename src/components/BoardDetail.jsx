@@ -6,25 +6,24 @@ const Detail = styled.div`
   float: left;
   width: 35%;
   height: 100%;
+  padding-left: 2rem;
 `;
 const DetailModal = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  margin-left: 1rem;
-  overflow: hidden;
 `;
 const DetailContent = styled.div`
   position: absolute;
   top: 0;
-  right: ${props => (props.on ? '0' : '-60rem')}
-  display: ${props => (props.on ? '1' : '0')}
-  width: 100%;
+  right: ${props => (props.on ? '0' : '-60rem')};
+  opacity: ${props => (props.on ? '1' : '0')};
+  width: 98%;
   height: 100%;
-  display: block;
   padding: 4rem;
   transition: all 0.5s;
-  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 0.5rem;
 `;
 const DetailRow = styled.div`
   display: flex;
@@ -71,10 +70,15 @@ const KakaoId = styled.div`
   font-size: 1.7rem !important;
   font-family: 'Lato', serif;
 `;
+const SmallMent = styled.p`
+  margin-top: 1rem;
+  ${props => props.theme.font.para_tiny};
+  color: rgba(255,255,255,0.6);
+`;
 
 class BoardDetail extends Component {
   allDetailShow = () => {
-    const { dataList, selectIndex } = this.props;
+    const { dataList, selectIndex, onShowProfile } = this.props;
 
     return dataList.data.map((list, i) => {
       return (
@@ -109,9 +113,10 @@ class BoardDetail extends Component {
               </span>
             ))}
           </DetailP>
-          <DetailAbsol>
+          <DetailAbsol onClick={() => onShowProfile(list.kakao)}>
             <DetailTitle>카카오톡ID.</DetailTitle>
             <KakaoId>{list.kakao}</KakaoId>
+            <SmallMent>클릭하면 좌측 상단에 프로필이 검색됩니다.</SmallMent>
           </DetailAbsol>
         </DetailContent>
       );

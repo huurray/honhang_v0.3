@@ -8,21 +8,24 @@ import {
   Auth,
   SignIn,
   SignUp,
-  Password
+  Password,
+  QnA
 } from './pages';
 import withStyle from './styles';
+import withGetData from './hoc/withGetData'
 
 const App = () => {
   return (
     <div>
-      <Route exact path="/" component={Main} />
+      <Route exact path="/" component={withGetData(Main)} />
       <Route path="/signin" component={SignIn} />
       <Route path="/signup" component={SignUp} />
       <Route path="/password" component={Password} />
-      <Route path="/boardall" component={BoardAll} />
-      <Route path="/board" component={Board} />
-      <Route path="/makeup" component={MakeUp} />
-      <Route path="/auth" component={Auth} />
+      <Route path="/boardall" component={withGetData(BoardAll)} />
+      <Route path="/board" component={withGetData(Board)} />
+      <Route path="/makeup" component={withGetData(MakeUp)} />
+      <Route path="/auth" component={withGetData(Auth)} />
+      <Route path="/qna" component={withGetData(QnA)} />
     </div>
   );
 };

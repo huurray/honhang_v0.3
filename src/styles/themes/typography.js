@@ -58,11 +58,9 @@ const sub_header = css`
   color: ${props => {
     if (props.white) {
       return '#fff';
-    } else if (props.primary_light) {
-      return '#ff8cb1';
     } else if (props.primary) {
       return '#ff6699';
-    }else {
+    } else {
       return '#222';
     }
   }};

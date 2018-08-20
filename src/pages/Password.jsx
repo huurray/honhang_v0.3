@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PasswordCon from '../containers/PasswordCon';
 
-const PageContainer = styled.main`
+const PageContainer = styled.div`
   width: 100%;
   position: relative;
 `;

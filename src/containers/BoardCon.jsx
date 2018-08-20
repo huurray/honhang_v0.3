@@ -12,6 +12,8 @@ import { bindActionCreators } from 'redux';
 import * as listActions from '../modules/list';
 import * as searchActions from '../modules/search';
 
+import firebase from 'firebase';
+
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -26,11 +28,44 @@ class BoardCon extends Component {
     dateNum: 0,
     focused: false,
     modalText: '',
-    modalState: false
+    modalState: false,
+    kakaoInfo: {},
+    profileModal: false
+  };
+
+  //kakao정보 가져오기
+  findKakaoUser = kakaoId => {
+    const db = firebase.firestore();
+    const docRef = db.collection('users');
+
+    let selectedUser = {};
+    return docRef
+      .where('kakaoId', '==', kakaoId)
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          const data = doc.data();
+          selectedUser = {
+            name: data.name,
+            age: data.age,
+            city: data.city,
+            phone: data.phone,
+            kakaoId: data.kakaoId,
+            kakaoBigImg: data.kakaoBigImg,
+            kakaoSmallImg: data.kakaoSmallImg,
+            email: data.email,
+            uid: data.uid
+          };
+        });
+        return selectedUser;
+      })
+      .catch(function(error) {
+        console.log('Error getting documents: ', error);
+      });
   };
 
   onSelect = i => {
-    this.setState({ selectIndex: i });
+    this.setState({ selectIndex: i, profileModal: false });
   };
 
   toggleResearch = () => {
@@ -61,7 +96,7 @@ class BoardCon extends Component {
   };
 
   onInsert = () => {
-    const { history, listActions, searchValue, searchActions } = this.props;
+    const { listActions, searchActions } = this.props;
     const { reSearchValue } = this.state;
 
     if (reSearchValue === '') {
@@ -71,19 +106,14 @@ class BoardCon extends Component {
       });
     } else {
       searchActions.search(reSearchValue);
-      history.push('/board');
-
-      listActions.listUp(searchValue);
-
-      //다시 고쳐야됌
+      listActions.listUp(reSearchValue);
     }
   };
 
-  componentDidMount() {
-    const { searchValue, listActions } = this.props;
-    listActions.listUp(searchValue);
-    console.log(searchValue);
-  }
+  onShowProfile = async kakaoId => {
+    const getKakaoInfo = await this.findKakaoUser(kakaoId);
+    this.setState({ kakaoInfo: getKakaoInfo, profileModal: true });
+  };
 
   render() {
     const { searchValue, dataList } = this.props;
@@ -94,10 +124,10 @@ class BoardCon extends Component {
       date,
       focused,
       modalText,
-      modalState
+      modalState,
+      kakaoInfo,
+      profileModal
     } = this.state;
-    
-    console.log(searchValue);
 
     return (
       <Container>
@@ -122,9 +152,21 @@ class BoardCon extends Component {
           //etc
           onHandleKeyPress={this.onHandleKeyPress}
           onInsert={this.onInsert}
+          //show profile
+          kakaoInfo={kakaoInfo}
+          profileModal={profileModal}
         />
-        <BoardList dataList={dataList} onSelect={this.onSelect} />
-        <BoardDetail dataList={dataList} selectIndex={selectIndex} />
+        <BoardList
+          dataList={dataList}
+          onSelect={this.onSelect}
+          selectIndex={selectIndex}
+        />
+        <BoardDetail
+          dataList={dataList}
+          selectIndex={selectIndex} 
+          //show profile
+          onShowProfile={this.onShowProfile}
+        />
       </Container>
     );
   }
@@ -132,6 +174,7 @@ class BoardCon extends Component {
 
 const mapStateToProps = state => ({
   searchValue: state.search.get('searchValue'),
+  loading: state.search.get('loading'),
   dataList: state.list.toJS()
 });
 const mapDispatchToProps = dispatch => ({

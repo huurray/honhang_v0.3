@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as searchActions from '../modules/search';
+import * as listActions from '../modules/list';
 
 class MainSearchCon extends Component {
   state = {
@@ -57,7 +58,7 @@ class MainSearchCon extends Component {
   };
 
   onInsert = () => {
-    const { history, searchActions } = this.props;
+    const { history, searchActions, listActions } = this.props;
     const { searchValue } = this.state;
 
     if (searchValue === '') {
@@ -66,6 +67,7 @@ class MainSearchCon extends Component {
         modalText: '검색어를 입력해주세요!'
       });
     } else {
+      listActions.listUp(searchValue);
       searchActions.search(searchValue);
       history.push('/board');
     }
@@ -119,7 +121,8 @@ class MainSearchCon extends Component {
 
 const mapStateToProps = state => ({});
 const mapDispatchToProps = dispatch => ({
-  searchActions: bindActionCreators(searchActions, dispatch)
+  searchActions: bindActionCreators(searchActions, dispatch),
+  listActions: bindActionCreators(listActions, dispatch),
 });
 
 export default connect(

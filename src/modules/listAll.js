@@ -9,15 +9,19 @@ function getListAll() {
   const date = new Date();
   const currentDate = date.getTime();
   let dataList = [];
-  
-  return docRef.where("dateNum", ">", currentDate).orderBy("dateNum").get().then(function(querySnapshot) {
-    querySnapshot.forEach(function(doc) {
-      let data = doc.data();
 
-      dataList = [...dataList, data];
+  return docRef
+    .where('dateNum', '>', currentDate)
+    .orderBy('dateNum')
+    .get()
+    .then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        let data = doc.data();
+
+        dataList = [...dataList, data];
+      });
+      return dataList;
     });
-    return dataList;
-  });
 }
 
 //action
@@ -26,8 +30,8 @@ export const listUpAll = createAction(GET_LIST_ALL, getListAll);
 
 //reducer
 const initialState = Map({
-    data: List([]),
-    loading: false
+  data: List([]),
+  loading: false
 });
 
 export default handleActions(

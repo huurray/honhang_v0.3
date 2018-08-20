@@ -6,3 +6,4 @@ export { default as BoardAll } from './BoardAll';
 export { default as Board } from './Board';
 export { default as MakeUp } from './MakeUp';
 export { default as Auth } from './Auth';
+export { default as QnA } from './QnA';

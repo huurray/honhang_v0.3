@@ -6,13 +6,13 @@ import firebase from 'firebase';
 function getStatusAuth() {
   return new Promise(resolve => {
     firebase.auth().onAuthStateChanged(function(user) {
-      let state = "";
+      let status = "";
       if (user) {
-        state = '로그아웃';
+        status = '로그아웃';
       } else {
-        state = '로그인';
+        status = '로그인';
       }
-      resolve(state);
+      resolve(status);
     });
   });
 }

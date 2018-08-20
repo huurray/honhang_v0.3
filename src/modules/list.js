@@ -12,7 +12,7 @@ function getList(searchValue) {
   const date = new Date();
   const currentDate = date.getTime();
   let dataList = [];
-  
+   
   return index
     .search({
       query: searchValue

@@ -13,6 +13,7 @@ const BoardBox = styled.div`
 const List = styled.ul`
   width: 100%;
   height: 100%;
+  padding-left: 1.2rem;
 `;
 const Total = styled.p`
   ${props => props.theme.font.para_tiny};
@@ -60,16 +61,20 @@ const ListNum = styled.p`
   display: inline-block;
   ${props => props.theme.font.para_tiny};
 `;
+const EmptyText = styled.h2`
+  ${props => props.theme.font.header_tertiary};
+  color: rgba(255, 255, 255, 0.6) !important;
+  padding: 8rem;
+`;
 
 class BoardList extends Component {
   state = {
-    on: false,
     moreList: 1
   };
 
   allListshow = () => {
-    const { dataList, onSelect } = this.props;
-    const { on, moreList } = this.state;
+    const { dataList, onSelect, selectIndex } = this.props;
+    const { moreList } = this.state;
 
     return dataList.data.map((list, i) => {
       let number = '';
@@ -82,8 +87,8 @@ class BoardList extends Component {
       const showList = () => {
         if (i < moreList * 20) {
           return (
-            <ListItem key={i} onClick={() => onSelect(i)} on={on}>
-              <ListTitle on={on} white>
+            <ListItem key={i} onClick={() => onSelect(i)} on={i===selectIndex}>
+              <ListTitle on={i===selectIndex} white>
                 <ListNum white>
                   {number}
                   &nbsp;&nbsp;-&nbsp;
@@ -93,7 +98,7 @@ class BoardList extends Component {
             </ListItem>
           );
         }
-      }
+      };
 
       return showList();
     });
@@ -117,7 +122,14 @@ class BoardList extends Component {
       <BoardBox innerRef={ref => (this.boardBox = ref)}>
         <List>
           <Total>TOTAL {dataList.data.length}</Total>
-          {this.allListshow()}
+          {dataList.data.length === 0 ? (
+            <EmptyText white>
+              입력된 정보가 없습니다.
+              <br /> 검색을 하시거나 모든 동행리스트를 열람하세요!
+            </EmptyText>
+          ) : (
+            this.allListshow()
+          )}
         </List>
       </BoardBox>
     );

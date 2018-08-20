@@ -29,6 +29,26 @@ const NavList = styled.div`
   color: ${props => props.on && '#000'};
   display: inline;
 `;
+const NavListLast = styled.div`
+  ${props => props.theme.font.sub_header};
+  color: ${props => props.on && '#000'};
+  display: inline;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -2.2rem;
+    width: 1px;
+    height: 1rem;
+    background-color: ${props=> props.on ? "#000" : "#fff"};
+  }
+`;
+const NavListProfile = styled.div`
+  ${props => props.theme.font.sub_header};
+  color: ${props => props.on && '#000'};
+  margin-left: 1.5rem;
+  display: inline;
+`;
 const NavListToMake = styled.div`
   ${props => props.theme.font.sub_header};
   display: inline;
@@ -67,6 +87,7 @@ const ProfileText = styled.div`
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
+  position: relative;
   cursor: pointer;
   &:not(:last-child) {
     margin-right: 3rem;
@@ -96,7 +117,8 @@ const HeaderNavBar = ({
   history,
   loginStatus,
   toggleLogin,
-  hasUserData
+  hasUserData,
+  getListAll
 }) => {
   return (
     <Section on={onScrollDown}>
@@ -112,16 +134,16 @@ const HeaderNavBar = ({
           </NavList>
         </StyledLink>
         <StyledLink to="/boardall">
-          <NavList white on={onScrollDown}>
+          <NavListLast white on={onScrollDown} onClick={getListAll}>
             동행 리스트
-          </NavList>
+          </NavListLast>
         </StyledLink>
         <StyledNotLink onClick={hasUserData}>
-          <NavListToMake primary_light on={onScrollDown}>
+          <NavListToMake primary on={onScrollDown}>
             동행 모집
           </NavListToMake>
         </StyledNotLink>
-        <NavList white>
+        <NavListProfile white>
           <ProfileBox onClick={onClickProfile}>
             <ProfileImg src={require(`../common/img/${iconUser}.png`)} />
             <ProfileImg src={require(`../common/img/${downArrow}.png`)} />
@@ -131,7 +153,7 @@ const HeaderNavBar = ({
               <ProfileText>설정</ProfileText>
             </ProfileContent>
           </ProfileBox>
-        </NavList>
+        </NavListProfile>
       </NavBarRight>
     </Section>
   );

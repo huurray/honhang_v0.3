@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import AuthCon from '../containers/AuthCon';
 import HeaderNavBarCon from '../containers/HeaderNavBarCon';
 
-const PageContainer = styled.main`
+const PageContainer = styled.div`
   width: 100%;
 `;
 

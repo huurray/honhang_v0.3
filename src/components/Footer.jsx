@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Section = styled.section`
   width: 100%;
@@ -33,8 +34,9 @@ const FooterListItem = styled.li`
 const FooterTitle = styled.span`
   ${props => props.theme.font.para_small};
 `;
-const FooterLink = styled.div`
+const FooterLink = styled(Link)`
   ${props => props.theme.font.para_small};
+  text-decoration: none;
   color: ${props => props.theme.colors.GREY_LIGHT_3};
   transition: all 0.2s;
   cursor: pointer;
@@ -64,16 +66,12 @@ const Footer = () => {
               <FooterTitle white>사업자등록번호 :</FooterTitle> 000-00-00000
             </FooterListItem>
             <FooterListItem white>
-              <FooterTitle white>통신판매업신고 :</FooterTitle>{' '}
-              2018-서울강남-00000
+              <FooterTitle white>통신판매업신고 :</FooterTitle> 2018-서울강남-00000
             </FooterListItem>
             <FooterListItem white>
-              <FooterTitle white>주소 :</FooterTitle> 인천광역시 연수구 선학로
-              101
+              <FooterTitle white>주소 :</FooterTitle> 인천광역시 연수구 선학로 101
             </FooterListItem>
-            <FooterListItem white>
-              2018 &copy;Copyright Honhang. ALL right reserved
-            </FooterListItem>
+            <FooterListItem white>2018 &copy;Copyright Honhang. ALL right reserved</FooterListItem>
           </FooterList>
         </Row>
         <Row>
@@ -90,19 +88,19 @@ const Footer = () => {
           <FooterList>
             <FooterTitle white>INFOMATION</FooterTitle>
             <FooterListItem white>
-              <FooterLink>회사소개</FooterLink>
+              <FooterLink to="/">회사소개</FooterLink>
             </FooterListItem>
             <FooterListItem white>
-              <FooterLink>QnA</FooterLink>
+              <FooterLink to="/qna">QnA</FooterLink>
             </FooterListItem>
             <FooterListItem white>
-              <FooterLink>서비스 이용약관</FooterLink>
+              <FooterLink to="/">서비스 이용약관</FooterLink>
             </FooterListItem>
             <FooterListItem white>
-              <FooterLink>개인정보 취급정책</FooterLink>
+              <FooterLink to="/">개인정보 취급정책</FooterLink>
             </FooterListItem>
             <FooterListItem white>
-              <FooterLink>운영정책</FooterLink>
+              <FooterLink to="/">운영정책</FooterLink>
             </FooterListItem>
           </FooterList>
         </Row>

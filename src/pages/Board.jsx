@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import BoardCon from '../containers/BoardCon';
 import HeaderNavBarCon from '../containers/HeaderNavBarCon';
 
-const PageContainer = styled.main`
+const PageContainer = styled.div`
   overflow: hidden;
 `;
-const Section = styled.main`
+const Section = styled.div`
   width: 80%;
   height: 100vh;
   margin: 0 auto;

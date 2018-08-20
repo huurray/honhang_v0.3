@@ -65,15 +65,7 @@ const IconImg = styled.img`
   margin-bottom: 2rem;
 `;
 
-const PageNav = ({
-  title,
-  location,
-  progressText,
-  progressTextSmall,
-  color,
-  firstImg,
-  secondImg
-}) => {
+const PageNav = ({ title, location, progressText, progressTextSmall, color, firstImg, secondImg, shutProgress }) => {
   return (
     <Section>
       <SectionTitle>
@@ -82,36 +74,30 @@ const PageNav = ({
       <SectionLocation>
         <Row>
           <CurrentLocation>홈</CurrentLocation>
-          <CurrentLocation>
-            &nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;
-          </CurrentLocation>
+          <CurrentLocation>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;</CurrentLocation>
           <CurrentLocation>{location}</CurrentLocation>
         </Row>
       </SectionLocation>
-      <SectionProgress>
-        <ProgressText>{progressText}</ProgressText>
-        <ProgressTextSmall color={color}>{progressTextSmall}</ProgressTextSmall>
-        <ProgressBox>
-          <ProgressIcon>
-            <IconImg src={require(`../common/img/${firstImg}.png`)} alt="iconId" />
-            <ProgressTextSmall>신원 증명</ProgressTextSmall>
-          </ProgressIcon>
-          <ProgressIcon>
-            <IconImg
-              src={require(`../common/img/${secondImg}.png`)}
-              alt="iconDocument"
-            />
-            <ProgressTextSmall>동행 정보 작성</ProgressTextSmall>
-          </ProgressIcon>
-          <ProgressIcon>
-            <IconImg
-              src={require('../common/img/icon-schedule.png')}
-              alt="iconSchedule"
-            />
-            <ProgressTextSmall>커뮤니티 등록</ProgressTextSmall>
-          </ProgressIcon>
-        </ProgressBox>
-      </SectionProgress>
+      {!shutProgress && (
+        <SectionProgress>
+          <ProgressText>{progressText}</ProgressText>
+          <ProgressTextSmall color={color}>{progressTextSmall}</ProgressTextSmall>
+          <ProgressBox>
+            <ProgressIcon>
+              <IconImg src={require(`../common/img/${firstImg}.png`)} alt="iconId" />
+              <ProgressTextSmall>신원 증명</ProgressTextSmall>
+            </ProgressIcon>
+            <ProgressIcon>
+              <IconImg src={require(`../common/img/${secondImg}.png`)} alt="iconDocument" />
+              <ProgressTextSmall>동행 정보 작성</ProgressTextSmall>
+            </ProgressIcon>
+            <ProgressIcon>
+              <IconImg src={require('../common/img/icon-schedule.png')} alt="iconSchedule" />
+              <ProgressTextSmall>커뮤니티 등록</ProgressTextSmall>
+            </ProgressIcon>
+          </ProgressBox>
+        </SectionProgress>
+      )}
     </Section>
   );
 };

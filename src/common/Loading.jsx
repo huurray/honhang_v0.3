@@ -33,11 +33,11 @@ const Circle = styled.div`
   animation: ${LoadingAni} 1s ease-in-out infinite;
   background-color: ${props => {
     if(props.first) {
-      return "rgba(0,0,0, 0.2)";
+      return "rgba(153,153,255, 0.5)";
     } else if (props.second) {
-      return "rgba(0,0,0, 0.3)";
+      return "rgba(153,102,255, 0.5)";
     } else if (props.third) {
-      return "rgba(0,0,0, 0.4)";
+      return "rgba(204,51,204, 0.5)";
     }
   }};
 `;

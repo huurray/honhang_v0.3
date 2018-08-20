@@ -11,11 +11,9 @@ import * as userActions from './modules/user';
 class Root extends Component {
   componentWillMount() {
     //유저정보 가져오기
-    const { loginStatus, statusActions, userActions } = this.props;
+    const { statusActions, userActions } = this.props;
     statusActions.isLogin();
-    if(loginStatus === '로그아웃'){
-      userActions.getUser();
-    }
+    userActions.getUser();
   }
 
   render() {

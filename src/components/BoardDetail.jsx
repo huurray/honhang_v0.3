@@ -71,7 +71,7 @@ const KakaoId = styled.div`
   font-family: 'Lato', serif;
 `;
 const SmallMent = styled.p`
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   ${props => props.theme.font.para_tiny};
   color: rgba(255,255,255,0.6);
 `;

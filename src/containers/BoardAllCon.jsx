@@ -116,6 +116,10 @@ class BoardAllCon extends Component {
     this.setState({ kakaoInfo: getKakaoInfo, profileModal: true });
   };
 
+  onhideProfile = () => {
+    this.setState({ profileModal: false });
+  }
+
   render() {
     const { dataList } = this.props;
     const {
@@ -155,6 +159,7 @@ class BoardAllCon extends Component {
           //show profile
           kakaoInfo={kakaoInfo}
           profileModal={profileModal}
+          onhideProfile={this.onhideProfile}
         />
         <BoardList
           dataList={dataList}

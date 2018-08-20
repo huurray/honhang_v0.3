@@ -91,15 +91,23 @@ const ButtonBox = styled.div`
 const Profile = styled.div`
   position: absolute;
   top: 0;
-  left: ${props=> props.on ? "0" : "-35rem"};
+  left: ${props => (props.on ? '0' : '-35rem')};
   transition: all 0.4s;
   width: 90%;
   height: 32rem;
   border-radius: 0.5rem;
-  overflow: hidden;
   background-color: ${props => props.theme.colors.WHITE};
   text-align: left;
-  padding: 1rem;  
+  padding: 1rem;
+`;
+const ProfileCloser = styled.div`
+  ${props => props.theme.font.header_tertiary};
+  color: ${props => props.theme.colors.PRIMARY};
+  position: absolute;
+  top: -3rem;
+  right: 1rem;
+  font-weight: 600;
+  cursor: pointer;
 `;
 const ProfileImg = styled.div`
   width: 100%;
@@ -162,9 +170,9 @@ const BoardSort = ({
   modalState,
   hideSideModal,
   kakaoInfo,
-  profileModal
+  profileModal,
+  onhideProfile
 }) => {
-  
   return (
     <SortBox>
       <SideModal
@@ -172,8 +180,8 @@ const BoardSort = ({
         modalState={modalState}
         hideSideModal={hideSideModal}
       />
-
       <Profile on={profileModal}>
+        <ProfileCloser onClick={onhideProfile}>&times;</ProfileCloser>
         <ProfileImg url={kakaoInfo.kakaoBigImg} />
         <ProfileRow>
           <NameBox>
@@ -194,7 +202,7 @@ const BoardSort = ({
           </LocationBox>
         </ProfileRow>
         <ProfileRow>
-          <Bold>카카오톡Id :&nbsp;</Bold>
+          <Bold>카톡ID :&nbsp;</Bold>
           <Content>{kakaoInfo.kakaoId}</Content>
         </ProfileRow>
         <ProfileRow>

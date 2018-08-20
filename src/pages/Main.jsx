@@ -15,7 +15,6 @@ const PageContainer = styled.div`
 
 class Main extends Component {
 
-
   render() {
     const { history } = this.props;
     return (
@@ -31,4 +30,4 @@ class Main extends Component {
   }
 }
 
-export default Main;
+export default Main

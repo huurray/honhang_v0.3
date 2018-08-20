@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import SignInCard from '../components/SignInCard';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import * as statusActions from '../modules/status';
+import * as userActions from '../modules/user';
+
 class SignInCon extends Component {
   state = {
     email: '',
@@ -28,6 +34,12 @@ class SignInCon extends Component {
       .signInWithEmailAndPassword(email, password)
       .then(function(user) {
         if (user) {
+          
+          //유저정보 가져오기
+          const { statusActions, userActions } = onComponent.props;
+          statusActions.isLogin();
+          userActions.getUser();
+          
           history.replace('/');
         }
       })
@@ -56,11 +68,11 @@ class SignInCon extends Component {
       });
   };
 
-  onHandleKeyPress = (e) => {
-    if(e.key === 'Enter') {
+  onHandleKeyPress = e => {
+    if (e.key === 'Enter') {
       this.onInsert();
     }
-  }
+  };
 
   hideSideModal = () => {
     this.setState({ modalState: false });
@@ -86,4 +98,16 @@ class SignInCon extends Component {
   }
 }
 
-export default SignInCon;
+const mapStateToProps = state => ({
+  loginStatus: state.status.get('loginStatus'),
+  loading: state.user.toJS().loading
+});
+const mapDispatchToProps = dispatch => ({
+  statusActions: bindActionCreators(statusActions, dispatch),
+  userActions: bindActionCreators(userActions, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignInCon);

@@ -14,6 +14,7 @@ class Root extends Component {
     const { statusActions, userActions } = this.props;
     statusActions.isLogin();
     userActions.getUser();
+    
   }
 
   render() {

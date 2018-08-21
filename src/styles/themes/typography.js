@@ -41,6 +41,15 @@ const english_big = css`
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 
+const english_small = css`
+  font-family: 'Lato', serif;
+  text-decoration: none;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: ${props => (props.white ? '#fff' : '#222')};
+`;
+
 const english_primary = css`
   font-family: 'Lato', serif;
   text-decoration: none;
@@ -89,6 +98,13 @@ const para_tertiary = css`
   line-height: 1.5;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
+const para_forth = css`
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: ${props => (props.white ? '#fff' : '#222')};
+`;
 const para_small = css`
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 300;
@@ -103,6 +119,13 @@ const para_tiny = css`
   line-height: 1.4;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
+const para_super_tiny = css`
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  font-size: 1.18rem;
+  line-height: 1.4;
+  color: ${props => (props.white ? '#fff' : '#222')};
+`;
 
 export default {
   header_primary,
@@ -110,11 +133,14 @@ export default {
   header_secondarySmall,
   header_tertiary,
   english_big,
+  english_small,
   english_primary,
   sub_header,
   para_primary,
   para_secondary,
   para_tertiary,
+  para_forth,
   para_small,
-  para_tiny
+  para_tiny,
+  para_super_tiny
 };

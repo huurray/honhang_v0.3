@@ -67,7 +67,7 @@ const Label = styled.label`
 const Input = styled.input`
   ${props => props.theme.font.para_small};
   width: 21rem;
-  height: 4.5rem;
+  height: 4rem;
   padding: 1rem;
   border-radius: 0.5rem;
   background-color: rgba(255, 255, 255, 0.2);
@@ -93,8 +93,8 @@ const Profile = styled.div`
   top: 0;
   left: ${props => (props.on ? '0' : '-35rem')};
   transition: all 0.4s;
-  width: 90%;
-  height: 32rem;
+  width: 80%;
+  height: 29.5rem;
   border-radius: 0.5rem;
   background-color: ${props => props.theme.colors.WHITE};
   text-align: left;
@@ -111,8 +111,10 @@ const ProfileCloser = styled.div`
 `;
 const ProfileImg = styled.div`
   width: 100%;
-  height: 20rem;
+  height: 18rem;
   background-image: url(${props => props.url});
+  background-repeat: no-repeat;
+  background-position: center center;
   background-size: cover;
   margin-bottom: 1rem;
 `;
@@ -132,7 +134,7 @@ const LocationBox = styled.div`
   justify-content: right;
 `;
 const Name = styled.div`
-  ${props => props.theme.font.header_tertiary};
+  ${props => props.theme.font.sub_header};
 `;
 const Age = styled.div`
   padding-top: 0.5rem;
@@ -147,10 +149,10 @@ const Icon = styled.img`
   height: auto;
 `;
 const Content = styled.div`
-  ${props => props.theme.font.para_tiny};
+  ${props => props.theme.font.para_super_tiny};
 `;
 const Bold = styled.h3`
-  ${props => props.theme.font.para_tiny};
+  ${props => props.theme.font.para_super_tiny};
   font-weight: 500;
 `;
 
@@ -171,7 +173,9 @@ const BoardSort = ({
   hideSideModal,
   kakaoInfo,
   profileModal,
-  onhideProfile
+  onhideProfile,
+  custom,
+  all
 }) => {
   return (
     <SortBox>
@@ -182,7 +186,11 @@ const BoardSort = ({
       />
       <Profile on={profileModal}>
         <ProfileCloser onClick={onhideProfile}>&times;</ProfileCloser>
-        <ProfileImg url={kakaoInfo.kakaoBigImg} />
+        {kakaoInfo.kakaoBigImg === null ? (
+          <ProfileImg url={require('../common/img/user-nobody.png')} />
+        ) : (
+          <ProfileImg url={kakaoInfo.kakaoBigImg} />
+        )}
         <ProfileRow>
           <NameBox>
             <Name>
@@ -211,10 +219,12 @@ const BoardSort = ({
         </ProfileRow>
       </Profile>
 
-      <SortMenu white on>
+      <SortMenu white on={all}>
         ALL
       </SortMenu>
-      <SortMenu white>CUSTOM</SortMenu>
+      <SortMenu white on={custom}>
+        CUSTOM
+      </SortMenu>
       {searchValue && (
         <Searched white>
           '{searchValue}

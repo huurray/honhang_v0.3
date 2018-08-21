@@ -9,7 +9,11 @@ import {
   SignIn,
   SignUp,
   Password,
-  QnA
+  QnA,
+  Agreement,
+  Privacy,
+  MyPage,
+  Local
 } from './pages';
 import withStyle from './styles';
 import withGetData from './hoc/withGetData'
@@ -26,6 +30,10 @@ const App = () => {
       <Route path="/makeup" component={withGetData(MakeUp)} />
       <Route path="/auth" component={withGetData(Auth)} />
       <Route path="/qna" component={withGetData(QnA)} />
+      <Route path="/agreement" component={withGetData(Agreement)} />
+      <Route path="/privacy" component={withGetData(Privacy)} />
+      <Route path="/mypage" component={withGetData(MyPage)} />
+      <Route path="/local" component={withGetData(Local)} />
     </div>
   );
 };

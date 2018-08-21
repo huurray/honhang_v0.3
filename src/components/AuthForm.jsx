@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 import { SpecialButton } from '../styles/ui/buttons';
 import SideModal from '../common/SideModal';
 
@@ -61,10 +63,9 @@ const FormCheck = styled.input`
 const Label = styled.label`
   ${props => props.theme.font.para_tertiary};
 `;
-const Atag = styled.a`
+const Atag = styled(Link)`
   margin-left: 1rem;
-  color: {props => props.theme.colors.GREY_DARK_3};
-  text-decoration: underline;
+  color: ${props => props.theme.colors.GREY_DARK_3} ;
   font-size: 1.4rem;
   font-weight: 600;
   cursor: pointer;
@@ -161,24 +162,23 @@ const AuthForm = ({
       <FormElement>
         <FormCheck type="checkbox" name="check1" checked={check1} onChange={onCheckboxChange} id="auth-agree1" />
         <Label htmlFor="auth-agree1">이용약관 동의</Label>
-        <Atag>내용보기</Atag>
+        <Atag to="/agreement">내용보기</Atag>
       </FormElement>
       <FormElement>
         <FormCheck type="checkbox" name="check2" checked={check2} onChange={onCheckboxChange} id="auth-agree2" />
         <Label htmlFor="auth-agree2">개인정보 수집 및 이용에 대한 동의</Label>
-        <Atag>내용보기</Atag>
+        <Atag to="/privacy">내용보기</Atag>
       </FormElement>
       <FormElement>
         <FormCheck type="checkbox" name="check3" checked={check3} onChange={onCheckboxChange} id="auth-agree3" />
         <Label htmlFor="auth-agree3">개인정보 수집 및 이용안내</Label>
-        <Atag>내용보기</Atag>
+        <Atag to="/privacy">내용보기</Atag>
       </FormElement>
       <FormElement>
         <FormCheck type="checkbox" checked={checkAll} onChange={onCheckboxAllChange} id="auth-agree4" />
         <Label htmlFor="auth-agree4">
           사이트 이용을 위한 이용약관, 개인정보 수집 및 이용에 모두 동의합니다.
         </Label>
-        <Atag>내용보기</Atag>
       </FormElement>
       <FormButtonBox>
         <SpecialButton white marginRight>

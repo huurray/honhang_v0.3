@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import QnAForm from '../components/QnAForm';
 import PageNav from '../components/PageNav';
+import Footer from '../components/Footer';
 
 class QnACon extends Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class QnACon extends Component {
           menuIndex={menuIndex}
           contentIndex={contentIndex}
         />
+        <Footer />
       </Fragment>
     );
   }

@@ -156,6 +156,7 @@ class BoardCon extends Component {
           //etc
           onHandleKeyPress={this.onHandleKeyPress}
           onInsert={this.onInsert}
+          custom={true}
           //show profile
           kakaoInfo={kakaoInfo}
           profileModal={profileModal}

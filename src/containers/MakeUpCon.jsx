@@ -4,6 +4,10 @@ import PageNav from '../components/PageNav';
 
 import firebase from 'firebase';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import * as listAllActions from '../modules/listAll';
+import * as userActions from '../modules/user';
 
 class MakeUpCon extends Component {
   state = {
@@ -58,7 +62,7 @@ class MakeUpCon extends Component {
     const docRef = db.collection('donghang');
 
     const { title, place, howMany, content, date } = this.state;
-    const { userData, history } = this.props;
+    const { userData, history, listAllActions } = this.props;
 
     //check fill form
     if (
@@ -75,24 +79,29 @@ class MakeUpCon extends Component {
     } else {
       const d = date._d;
       const dateLit = `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
+      firebase.auth().onAuthStateChanged(function(user) {
+        docRef
+          .add({
+            title,
+            place,
+            howMany,
+            content,
+            kakao: userData.kakaoId,
+            date: dateLit,
+            dateNum: date._d.getTime(),
+            uid: user.uid
+          })
+          .then(function(docRef) {
+            console.log('Document written with ID: ', docRef.id);
 
-      docRef
-        .add({
-          title,
-          place,
-          howMany,
-          content,
-          kakao: userData.kakaoId,
-          date: dateLit,
-          dateNum: date._d.getTime()
-        })
-        .then(function(docRef) {
-          console.log('Document written with ID: ', docRef.id);
-          history.replace('/boardall');
-        })
-        .catch(function(error) {
-          console.error('Error adding document: ', error);
-        });
+            listAllActions.listUpAll();
+
+            history.push('/boardall');
+          })
+          .catch(function(error) {
+            console.error('Error adding document: ', error);
+          });
+      });
     }
   };
 
@@ -133,4 +142,12 @@ const mapStateToProps = state => ({
   userData: state.user.toJS().data
 });
 
-export default connect(mapStateToProps)(MakeUpCon);
+const mapDispatchToProps = dispatch => ({
+  listAllActions: bindActionCreators(listAllActions, dispatch),
+  userActions: bindActionCreators(userActions, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MakeUpCon);

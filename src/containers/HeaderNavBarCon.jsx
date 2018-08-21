@@ -57,7 +57,18 @@ class HeaderNavBarCon extends Component {
         .then(function() {
           statusActions.isLogin();
           userActions.getUser();
+
+          history.replace("/");
         });
+    }
+  };
+
+  toggleMyPage = () => {
+    const { loginStatus, history } = this.props;
+    if (loginStatus === '로그인') {
+      history.push('/signin');
+    } else if (loginStatus === '로그아웃') {
+      history.push('/mypage');
     }
   };
 
@@ -113,6 +124,7 @@ class HeaderNavBarCon extends Component {
           toggleLogin={this.toggleLogin}
           hasUserData={this.hasUserData}
           getListAll={this.getListAll}
+          toggleMyPage={this.toggleMyPage}
         />
       </div>
     );

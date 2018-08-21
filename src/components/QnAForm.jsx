@@ -59,6 +59,7 @@ const Title = styled.div`
   }
 `;
 const Contnent = styled.div`
+  ${props => props.theme.font.para_forth};
   width: 100%;
   height: 20rem;
   display: ${props => (props.on ? 'block' : 'none')};
@@ -88,11 +89,11 @@ class QnAForm extends Component {
         <ListBox key={i} on={menuIndex === i}>
           <List>
             <Title onClick={() => onClickList(i)}>
-              질문
+              궁금하신 사항을 모집중입니다.
               {i + 1}
             </Title>
             <Contnent on={contentIndex === i}>
-              답변
+              성실히 답변하겠습니다.
               {i + 1}
             </Contnent>
           </List>

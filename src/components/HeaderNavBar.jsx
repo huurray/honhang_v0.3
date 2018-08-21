@@ -10,7 +10,7 @@ const Section = styled.section`
   left: 0;
   padding: 3rem 10%;
   z-index: 999;
-  box-shadow: ${props => props.on && '0 1rem 1.5rem rgba(0,0,0, 0.1)'};
+  box-shadow: ${props => props.on && '0 0.7rem 1.2rem rgba(0,0,0, 0.05)'};
   background-color: ${props => props.on && '#fff'};
 `;
 const NavBarLeft = styled.div`
@@ -34,13 +34,13 @@ const NavListLast = styled.div`
   color: ${props => props.on && '#000'};
   display: inline;
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     right: -2.2rem;
     width: 1px;
     height: 1rem;
-    background-color: ${props=> props.on ? "#000" : "#fff"};
+    background-color: ${props => (props.on ? '#000' : '#fff')};
   }
 `;
 const NavListProfile = styled.div`
@@ -59,7 +59,7 @@ const NavListToMake = styled.div`
 `;
 const ProfileBox = styled.div`
   float: right;
-  width: 10rem;
+  width: 12rem;
   height: 2.5rem;
   cursor: pointer;
 `;
@@ -70,19 +70,30 @@ const ProfileImg = styled.img`
 `;
 const ProfileContent = styled.div`
   margin-top: 0.5rem;
-  width: 10rem;
-  height: 10rem;
+  width: 12rem;
+  height: 11rem;
   background-color: ${props => props.theme.colors.WHITE};
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
   border: 1px solid ${props => props.theme.colors.GREY_LIGHT_3};
   opacity: ${props => (props.on ? '1' : '0')};
+  border-radius: 0.5rem;
 `;
 const ProfileText = styled.div`
-  ${props => props.theme.font.para_secondary};
+  ${props => props.theme.font.para_forth};
   text-align: center;
   padding: 0.5rem;
+  color: ${props => props.theme.colors.GREY_DARK_4};
   &:hover {
     background-color: ${props => props.theme.colors.GREY_LIGHT_2};
+  }
+  &:first-child {
+    margin-top: 0.4rem;
+  }
+  &:last-child {
+    border-top: 1px solid ${props => props.theme.colors.GREY_LIGHT_2};
+  }
+  &:not(:last-child) {
+    margin-bottom: 0.3rem;
   }
 `;
 const StyledLink = styled(Link)`
@@ -107,6 +118,17 @@ const StyledNotLink = styled.div`
   margin-right: 3rem;
 `;
 
+const ProfileLink = styled(Link)`
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+    color: ${props => props.theme.colors.GREY_DARK_4};
+  }
+`;
+
 const HeaderNavBar = ({
   logoImg,
   iconUser,
@@ -118,7 +140,8 @@ const HeaderNavBar = ({
   loginStatus,
   toggleLogin,
   hasUserData,
-  getListAll
+  getListAll,
+  toggleMyPage
 }) => {
   return (
     <Section on={onScrollDown}>
@@ -128,7 +151,7 @@ const HeaderNavBar = ({
         </StyledLink>
       </NavBarLeft>
       <NavBarRight>
-        <StyledLink to="/">
+        <StyledLink to="/local">
           <NavList white on={onScrollDown}>
             로컬 멘토
           </NavList>
@@ -148,9 +171,11 @@ const HeaderNavBar = ({
             <ProfileImg src={require(`../common/img/${iconUser}.png`)} />
             <ProfileImg src={require(`../common/img/${downArrow}.png`)} />
             <ProfileContent on={isProfileOn}>
+              <ProfileText onClick={toggleMyPage}>마이페이지</ProfileText>
+              <ProfileText>
+                <ProfileLink to="/qna">자주묻는질문</ProfileLink>
+              </ProfileText>
               <ProfileText onClick={toggleLogin}>{loginStatus}</ProfileText>
-              <ProfileText>마이페이지</ProfileText>
-              <ProfileText>설정</ProfileText>
             </ProfileContent>
           </ProfileBox>
         </NavListProfile>

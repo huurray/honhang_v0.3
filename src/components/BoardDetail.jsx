@@ -32,7 +32,7 @@ const DetailH1 = styled.h1`
   ${props => props.theme.font.header_tertiary};
   color: ${props => props.theme.colors.WHITE} !important;
   padding-bottom: 0.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 `;
 const DetailH3 = styled.h3`
@@ -45,6 +45,8 @@ const DetailP = styled.div`
   ${props => props.theme.font.para_secondary};
   color: ${props => props.theme.colors.WHITE} !important;
   margin-top: 1rem;
+  max-height: 45%;
+  overflow: auto;
 `;
 const DetailTitle = styled.p`
   ${props => props.theme.font.para_tiny};
@@ -56,7 +58,7 @@ const DetailAbsol = styled.div`
   bottom: 4rem;
 `;
 const KakaoId = styled.div`
-  ${props => props.theme.font.para_primary};
+  ${props => props.theme.font.para_forth};
   color: ${props => props.theme.colors.WHITE} !important;
   cursor: pointer;
   background-image: url(${searchIconYellow});

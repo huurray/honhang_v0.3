@@ -94,13 +94,10 @@ const Footer = () => {
               <FooterLink to="/qna">QnA</FooterLink>
             </FooterListItem>
             <FooterListItem white>
-              <FooterLink to="/">서비스 이용약관</FooterLink>
+              <FooterLink to="/agreement">서비스 이용약관</FooterLink>
             </FooterListItem>
             <FooterListItem white>
-              <FooterLink to="/">개인정보 취급정책</FooterLink>
-            </FooterListItem>
-            <FooterListItem white>
-              <FooterLink to="/">운영정책</FooterLink>
+              <FooterLink to="/privacy">개인정보 취급정책</FooterLink>
             </FooterListItem>
           </FooterList>
         </Row>

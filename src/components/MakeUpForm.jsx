@@ -99,6 +99,7 @@ const MakeUpForm = ({
         <FormInput
           type="text"
           name="title"
+          maxLength="27"
           placeholder="게시글 제목"
           onChange={onHandleChange}
           autoComplete="off"
@@ -110,6 +111,7 @@ const MakeUpForm = ({
         <FormInput
           type="text"
           name="place"
+          maxLength="12"
           placeholder="에펠탑"
           onChange={onHandleChange}
           autoComplete="off"
@@ -158,7 +160,6 @@ const MakeUpForm = ({
           type="textarea"
           name="content"
           onChange={onHandleChange}
-          maxlength="200"
           placeholder="하고싶은 말을 적어주세요~"
           onKeyDown={onHandleKeyDown}
           value={content}

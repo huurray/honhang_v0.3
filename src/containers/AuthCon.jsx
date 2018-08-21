@@ -118,6 +118,7 @@ class AuthCon extends Component {
         modalText: '약관에 모두 동의 해주세요.'
       });
     } else {
+      
       userActions.postUser(
         name,
         age,

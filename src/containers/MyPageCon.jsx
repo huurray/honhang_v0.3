@@ -18,7 +18,6 @@ class MyPageCon extends Component {
   findMyHistory = () => {
     const db = firebase.firestore();
     const docRef = db.collection('donghang');
-    const { myData } = this.state;
     const onComponent = this;
 
     return firebase.auth().onAuthStateChanged(function(user) {
@@ -29,7 +28,9 @@ class MyPageCon extends Component {
           .then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
               let data = doc.data();
-              onComponent.setState({ myData: [...myData, data] });
+              onComponent.setState(prevState => ({
+                myData: [...prevState.myData, data]
+              }));
             });
           })
           .catch(function(error) {

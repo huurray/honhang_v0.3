@@ -119,7 +119,7 @@ class MainSearch extends Component {
           </SearchText>
           <Search>
             <SearchElement half>
-              <SearchLabel white>여행지 키워드 *</SearchLabel>
+              <SearchLabel white>여행지 키워드(필수)</SearchLabel>
               <SearchInput
                 type="text"
                 onChange={onHandleChange}
@@ -130,7 +130,7 @@ class MainSearch extends Component {
               />
             </SearchElement>
             <SearchElement>
-              <SearchLabel white>날짜</SearchLabel>
+              <SearchLabel white>날짜(선택)</SearchLabel>
               <SingleDatePicker
                 date={date}
                 onDateChange={date => onDateChange(date)}

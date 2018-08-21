@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import { SpecialButton } from '../styles/ui/buttons';
-import arrowDown from '../common/img/down-arrow-black.png';
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 94rem;
   padding-top: 10rem;
   background-color: ${props => props.theme.colors.GREY_LIGHT_1};
 `;
@@ -109,46 +108,29 @@ const ListItem = styled.li`
   width: 100%;
   list-style: none;
   position: relative;
-  background-image: linear-gradient(
-    120deg,
-    transparent 0%,
-    transparent 50%,
-    rgba(0, 0, 0, 0.05) 50%
-  );
-  background-size: 230%;
-  transition: all 0.5s;
   border-bottom: 1px solid ${props => props.theme.colors.GREY_LIGHT_2};
-  &:hover,
-  &:active {
-    background-position: 100%;
-  }
 `;
 const ListTitle = styled.div`
   display: block;
   width: 100%;
   height: 8rem;
   padding: 3rem;
-  cursor: pointer;
   ${props => props.theme.font.header_tertiary};
-  &::after {
-    content: '';
-    position: absolute;
-    top: 3rem;
-    right: 2rem;
-    width: 2rem;
-    height: 2rem;
-    background: ${props => props.on && `url(${arrowDown})`};
-    background-size: cover;
-  }
 `;
 const ListNum = styled.p`
   display: inline-block;
   ${props => props.theme.font.para_tiny};
 `;
+const Date = styled.p`
+  float: right;
+  ${props => props.theme.font.para_small};
+  color: ${props => props.theme.colors.GREY_DARK_1};
+`;
 
 class MyPageForm extends Component {
   listUpHistory = () => {
     const { myData } = this.props;
+
     return myData.map((list, i) => {
       let number = '';
       if (i < 9) {
@@ -157,13 +139,14 @@ class MyPageForm extends Component {
         number = `${i + 1}`;
       }
       return (
-        <ListItem>
-          <ListTitle on>
+        <ListItem key={i}>
+          <ListTitle>
             <ListNum>
               {number}
               &nbsp;&nbsp;-&nbsp;
             </ListNum>
             {list.title}
+            <Date>{list.dateNow}</Date>
           </ListTitle>
         </ListItem>
       );
@@ -214,14 +197,12 @@ class MyPageForm extends Component {
               <Content>{userData.kakaoId}</Content>
             </ContentRow>
             <ButtonBox>
-              <SpecialButton onClick={logout} >로그아웃</SpecialButton>
+              <SpecialButton onClick={logout}>로그아웃</SpecialButton>
             </ButtonBox>
           </Profile>
           <History>
             <HistoryTitle>History</HistoryTitle>
-            <List>
-              {this.listUpHistory()}
-            </List>
+            <List>{this.listUpHistory()}</List>
           </History>
         </MyPage>
       </Container>

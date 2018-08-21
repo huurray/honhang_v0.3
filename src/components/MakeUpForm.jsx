@@ -99,7 +99,7 @@ const MakeUpForm = ({
         <FormInput
           type="text"
           name="title"
-          maxLength="27"
+          maxLength="28"
           placeholder="게시글 제목"
           onChange={onHandleChange}
           autoComplete="off"

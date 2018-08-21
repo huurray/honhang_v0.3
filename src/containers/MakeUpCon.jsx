@@ -78,7 +78,9 @@ class MakeUpCon extends Component {
       });
     } else {
       const d = date._d;
-      const dateLit = `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`;
+      const dateLit = `${d.getFullYear()}.${d.getMonth() + 1}.${d.getDate()}`;
+      const dNow = new Date();
+      const dNowLit = `${dNow.getFullYear()}.${dNow.getMonth() + 1}.${dNow.getDate()}`;
       firebase.auth().onAuthStateChanged(function(user) {
         docRef
           .add({
@@ -89,6 +91,7 @@ class MakeUpCon extends Component {
             kakao: userData.kakaoId,
             date: dateLit,
             dateNum: date._d.getTime(),
+            dateNow: dNowLit,
             uid: user.uid
           })
           .then(function(docRef) {

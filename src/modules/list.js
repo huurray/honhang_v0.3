@@ -10,7 +10,7 @@ function getList(searchValue) {
   const client = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_SEARCH_KEY);
   const index = client.initIndex('donghang');
   const date = new Date();
-  const currentDate = date.getTime();
+  const currentDate = date.getTime()-86400000;
   let dataList = [];
    
   return index
@@ -18,7 +18,7 @@ function getList(searchValue) {
       query: searchValue
     })
     .then(function(responses) {
-      dataList = responses.hits.filter(list => list.dateNum > currentDate);
+      dataList = responses.hits.filter(list => list.dateNum >= currentDate);
       return dataList;
     });
 }

@@ -110,7 +110,7 @@ class MakeUpCon extends Component {
 
   render() {
     const { content, date, focused, modalState, modalText } = this.state;
-    const { userData } = this.props;
+    const { userData, history } = this.props;
 
     return (
       <Fragment>
@@ -135,6 +135,7 @@ class MakeUpCon extends Component {
           modalText={modalText}
           hideSideModal={this.hideSideModal}
           onHandleKeyDown={this.onHandleKeyDown}
+          history={history}
         />
       </Fragment>
     );

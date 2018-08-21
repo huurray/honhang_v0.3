@@ -24,12 +24,9 @@ const FooterList = styled.ul`
   list-style: none;
 `;
 const FooterListItem = styled.li`
-  ${props => props.theme.font.para_small};
+  ${props => props.theme.font.para_tiny};
   color: ${props => props.theme.colors.GREY_LIGHT_3} !important;
-  font-weight: 100 !important;
-  &:not(:last-child) {
-    margin-bottom: 0.6rem;
-  }
+  font-weight: 400 !important;
 `;
 const FooterTitle = styled.span`
   ${props => props.theme.font.para_small};
@@ -71,7 +68,7 @@ const Footer = () => {
             <FooterListItem white>
               <FooterTitle white>주소 :</FooterTitle> 인천광역시 연수구 선학로 101
             </FooterListItem>
-            <FooterListItem white>2018 &copy;Copyright Honhang. ALL right reserved</FooterListItem>
+            <FooterListItem white>2018 &copy;Copyright Honhang.<br />ALL right reserved</FooterListItem>
           </FooterList>
         </Row>
         <Row>

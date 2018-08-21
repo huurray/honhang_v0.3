@@ -7,18 +7,18 @@ function getListAll() {
   const db = firebase.firestore();
   const docRef = db.collection('donghang');
   const date = new Date();
-  const currentDate = date.getTime();
+  const currentDate = date.getTime()-86400000;
   let dataList = [];
-
+  
   return docRef
-    .where('dateNum', '>', currentDate)
-    .orderBy('dateNum')
+    .where("dateNum", ">=", currentDate)
+    .orderBy("dateNum")
     .get()
     .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
         let data = doc.data();
-
         dataList = [...dataList, data];
+        console.log(dataList);
       });
       return dataList;
     });

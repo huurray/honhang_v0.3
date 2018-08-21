@@ -93,7 +93,7 @@ const Profile = styled.div`
   top: 0;
   left: ${props => (props.on ? '0' : '-35rem')};
   transition: all 0.4s;
-  width: 80%;
+  width: 95%;
   height: 29.5rem;
   border-radius: 0.5rem;
   background-color: ${props => props.theme.colors.WHITE};
@@ -153,7 +153,7 @@ const Content = styled.div`
 `;
 const Bold = styled.h3`
   ${props => props.theme.font.para_super_tiny};
-  font-weight: 500;
+  font-weight: 700;
 `;
 
 const BoardSort = ({

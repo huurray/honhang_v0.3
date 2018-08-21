@@ -57,6 +57,7 @@ class SignUpCon extends Component {
       })
       .catch(function(error) {
         let errorMessage = error.message;
+        console.log(errorMessage);
 
         switch (errorMessage) {
           case 'The email address is badly formatted.':
@@ -67,6 +68,9 @@ class SignUpCon extends Component {
             break;
           case 'Password should be at least 6 characters':
             errorMessage = '비밀번호는 6자리 이상 입력해주세요.';
+            break;
+          case 'The email address is already in use by another account.':
+            errorMessage = '이미 가입된 이메일 아이디에요.';
             break;
           default:
             return false;

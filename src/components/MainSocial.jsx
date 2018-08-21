@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Section = styled.section`
   width: 100%;
   height: 15rem;
-  padding-top: 5rem;
+  padding-top: 6rem;
 `;
 const Social = styled.div`
   width: 50rem;

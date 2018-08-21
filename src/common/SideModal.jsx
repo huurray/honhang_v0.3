@@ -25,7 +25,7 @@ const Img = styled.img`
   margin-right: 1rem;
 `;
 const Text = styled.h2`
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
   font-size: 1.4rem;
   line-height: 2;
   color: white;

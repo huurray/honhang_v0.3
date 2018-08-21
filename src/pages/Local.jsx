@@ -15,7 +15,7 @@ const NoInfo = styled.div`
   text-align: center;
 `;
 const Text = styled.div`
-  ${props => props.theme.font.header_primary};
+  ${props => props.theme.font.header_secondarySmall};
   color: ${props=>props.theme.colors.GREY_DARK_1};
   margin-bottom: 3rem;
 `;

@@ -118,7 +118,6 @@ class AuthCon extends Component {
         modalText: '약관에 모두 동의 해주세요.'
       });
     } else {
-      
       userActions.postUser(
         name,
         age,
@@ -146,6 +145,7 @@ class AuthCon extends Component {
       modalState,
       modalText
     } = this.state;
+    const { history } = this.props;
     return (
       <Fragment>
         <PageNav
@@ -170,6 +170,7 @@ class AuthCon extends Component {
           modalState={modalState}
           modalText={modalText}
           hideSideModal={this.hideSideModal}
+          history={history}
         />
       </Fragment>
     );

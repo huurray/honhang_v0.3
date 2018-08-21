@@ -55,7 +55,7 @@ const SearchElement = styled.div`
 const SearchLabel = styled.label`
   margin: 0.5rem;
   display: block;
-  ${props => props.theme.font.para_small};
+  ${props => props.theme.font.para_tiny};
 `;
 const SearchInput = styled.input`
   ${props => props.theme.font.para_tertiary};

@@ -31,7 +31,7 @@ const FormElement = styled.div`
 `;
 const FormText = styled.h2`
   ${props => props.theme.font.para_tertiary};
-  font-weight: 500 !important;
+  font-weight: 700 !important;
   width: 20%;
 `;
 const FormInput = styled.input`
@@ -52,7 +52,7 @@ const ConfirmText = styled.p`
   ${props => props.theme.font.para_tiny};
   margin-left: 1.5rem;
   color: ${props => props.theme.colors.PRIMARY};
-  font-weight: 500;
+  font-weight: 700;
   text-decoration: underline;
 `;
 const FormCheck = styled.input`
@@ -65,7 +65,7 @@ const Label = styled.label`
 `;
 const Atag = styled(Link)`
   margin-left: 1rem;
-  color: ${props => props.theme.colors.GREY_DARK_3} ;
+  color: ${props => props.theme.colors.GREY_DARK_3};
   font-size: 1.4rem;
   font-weight: 600;
   cursor: pointer;
@@ -87,11 +87,12 @@ const AuthForm = ({
   onCheckboxAllChange,
   modalState,
   modalText,
-  hideSideModal
+  hideSideModal,
+  history
 }) => {
   return (
     <FormContainer>
-      <SideModal 
+      <SideModal
         modalState={modalState}
         text={modalText}
         hideSideModal={hideSideModal}
@@ -160,28 +161,57 @@ const AuthForm = ({
         )}
       </FormElement>
       <FormElement>
-        <FormCheck type="checkbox" name="check1" checked={check1} onChange={onCheckboxChange} id="auth-agree1" />
+        <FormCheck
+          type="checkbox"
+          name="check1"
+          checked={check1}
+          onChange={onCheckboxChange}
+          id="auth-agree1"
+        />
         <Label htmlFor="auth-agree1">이용약관 동의</Label>
         <Atag to="/agreement">내용보기</Atag>
       </FormElement>
       <FormElement>
-        <FormCheck type="checkbox" name="check2" checked={check2} onChange={onCheckboxChange} id="auth-agree2" />
+        <FormCheck
+          type="checkbox"
+          name="check2"
+          checked={check2}
+          onChange={onCheckboxChange}
+          id="auth-agree2"
+        />
         <Label htmlFor="auth-agree2">개인정보 수집 및 이용에 대한 동의</Label>
         <Atag to="/privacy">내용보기</Atag>
       </FormElement>
       <FormElement>
-        <FormCheck type="checkbox" name="check3" checked={check3} onChange={onCheckboxChange} id="auth-agree3" />
+        <FormCheck
+          type="checkbox"
+          name="check3"
+          checked={check3}
+          onChange={onCheckboxChange}
+          id="auth-agree3"
+        />
         <Label htmlFor="auth-agree3">개인정보 수집 및 이용안내</Label>
         <Atag to="/privacy">내용보기</Atag>
       </FormElement>
       <FormElement>
-        <FormCheck type="checkbox" checked={checkAll} onChange={onCheckboxAllChange} id="auth-agree4" />
+        <FormCheck
+          type="checkbox"
+          checked={checkAll}
+          onChange={onCheckboxAllChange}
+          id="auth-agree4"
+        />
         <Label htmlFor="auth-agree4">
           사이트 이용을 위한 이용약관, 개인정보 수집 및 이용에 모두 동의합니다.
         </Label>
       </FormElement>
       <FormButtonBox>
-        <SpecialButton white marginRight>
+        <SpecialButton
+          white
+          marginRight
+          onClick={() => {
+            history.push('/');
+          }}
+        >
           취소
         </SpecialButton>
         <SpecialButton onClick={onInsert}>확인</SpecialButton>

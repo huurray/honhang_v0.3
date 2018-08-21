@@ -29,8 +29,14 @@ const Row = styled.div`
 `;
 const CurrentLocation = styled.div`
   ${props => props.theme.font.para_tertiary};
-  font-weight: 400 !important;
+  font-weight: 700 !important;
   float: left;
+`;
+const CurrentLocationIcon = styled.div`
+  ${props => props.theme.font.para_tiny};
+  font-weight: 700 !important;
+  float: left;
+  margin-top: 0.2rem;
 `;
 const SectionProgress = styled.section`
   width: 60%;
@@ -43,7 +49,7 @@ const ProgressText = styled.div`
 `;
 const ProgressTextSmall = styled.div`
   ${props => props.theme.font.para_tertiary};
-  font-weight: 400 !important;
+  font-weight: 700 !important;
   padding-top: 1rem;
   text-align: center;
   color: ${props => props.color && '#ff3f7d'};
@@ -74,7 +80,7 @@ const PageNav = ({ title, location, progressText, progressTextSmall, color, firs
       <SectionLocation>
         <Row>
           <CurrentLocation>홈</CurrentLocation>
-          <CurrentLocation>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;</CurrentLocation>
+          <CurrentLocationIcon>&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;</CurrentLocationIcon>
           <CurrentLocation>{location}</CurrentLocation>
         </Row>
       </SectionLocation>

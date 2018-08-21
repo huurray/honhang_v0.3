@@ -1,69 +1,69 @@
 import { css } from 'styled-components';
 
 const header_primary = css`
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 500;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
   font-size: 3rem;
-  line-height: 1.5;
+  line-height: 1.7;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 
 const header_secondary = css`
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 500;
-  font-size: 2.2rem;
-  line-height: 1.5;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
+  font-size: 2.15rem;
+  line-height: 1.7;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 
 const header_secondarySmall = css`
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 500;
-  font-size: 2rem;
-  line-height: 1.5;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
+  font-size: 1.9rem;
+  line-height: 1.7;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 
 const header_tertiary = css`
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 500;
-  font-size: 1.8rem;
-  line-height: 1.5;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
+  font-size: 1.7rem;
+  line-height: 1.7;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 
 const english_big = css`
   font-family: 'Lato', serif;
   text-decoration: none;
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.7;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 
 const english_small = css`
   font-family: 'Lato', serif;
   text-decoration: none;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.7;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 
 const english_primary = css`
   font-family: 'Lato', serif;
   text-decoration: none;
-  font-size: 1.3rem;
-  font-weight: 500;
-  line-height: 1.5;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.7;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 
 const sub_header = css`
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 500;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
   font-size: 1.6rem;
-  line-height: 1.5;
+  line-height: 1.7;
   color: ${props => {
     if (props.white) {
       return '#fff';
@@ -76,54 +76,54 @@ const sub_header = css`
 `;
 
 const para_primary = css`
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 300;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 400;
   font-size: 1.6rem;
-  line-height: 1.5;
+  line-height: 1.7;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 
 const para_secondary = css`
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 500;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
   font-size: 1.5rem;
-  line-height: 1.5;
+  line-height: 1.7;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 
 const para_tertiary = css`
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 300;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 400;
   font-size: 1.5rem;
-  line-height: 1.5;
+  line-height: 1.7;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 const para_forth = css`
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 300;
-  font-size: 1.4rem;
-  line-height: 1.5;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 400;
+  font-size: 1.35rem;
+  line-height: 1.7;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 const para_small = css`
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 300;
-  font-size: 1.35rem;
-  line-height: 1.5;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 400;
+  font-size: 1.3rem;
+  line-height: 1.7;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 const para_tiny = css`
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 300;
-  font-size: 1.25rem;
-  line-height: 1.4;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.7;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 const para_super_tiny = css`
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 300;
-  font-size: 1.18rem;
-  line-height: 1.4;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 400;
+  font-size: 1.15rem;
+  line-height: 1.7;
   color: ${props => (props.white ? '#fff' : '#222')};
 `;
 

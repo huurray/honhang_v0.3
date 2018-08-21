@@ -35,7 +35,7 @@ const FormElement = styled.div`
 `;
 const FormText = styled.h2`
   ${props => props.theme.font.para_tertiary};
-  font-weight: 500 !important;
+  font-weight: 700 !important;
   width: 20%;
 `;
 const FormInput = styled.input`
@@ -70,7 +70,7 @@ const FormTextarea = styled.textarea`
 `;
 const FormButtonBox = styled.div`
   text-align: center;
-  margin-top: 20rem;
+  margin-top: 25rem;
 `;
 
 const MakeUpForm = ({
@@ -85,7 +85,8 @@ const MakeUpForm = ({
   modalState,
   modalText,
   hideSideModal,
-  onHandleKeyDown
+  onHandleKeyDown,
+  history
 }) => {
   return (
     <FormContainer>
@@ -169,7 +170,13 @@ const MakeUpForm = ({
       </FormElement>
 
       <FormButtonBox>
-        <SpecialButton white marginRight>
+      <SpecialButton
+          white
+          marginRight
+          onClick={() => {
+            history.push('/');
+          }}
+        >
           취소
         </SpecialButton>
         <SpecialButton onClick={onInsert}>작성</SpecialButton>

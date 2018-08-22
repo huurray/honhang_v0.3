@@ -1,5 +1,23 @@
-import { injectGlobal } from 'styled-components';
+import { injectGlobal, css } from 'styled-components';
 import reset from 'styled-reset';
+
+const sizes = {
+  bigDesktop: 1600,
+  desktop: 1280,
+  tablet: 900,
+  phone: 600
+}
+
+// Iterate through the sizes and create a media template
+const media = Object.keys(sizes).reduce((acc, label) => {
+  acc[label] = (...args) => css`
+    @media (max-width: ${sizes[label] / 16}em) {
+      ${css(...args)}
+    }
+  `
+
+  return acc
+}, {})
 
 export default () => injectGlobal`
 
@@ -13,6 +31,12 @@ export default () => injectGlobal`
   
   html {
     font-size: 62.5%;
+
+    ${media.bigDesktop`font-size: 50%;`}
+    ${media.desktop`font-size: 45%;`}
+    ${media.tablet`font-size: 40%;`}
+    ${media.phone`font-size: 30%;`}
+
   }
 
   body {

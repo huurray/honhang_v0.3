@@ -17,8 +17,8 @@ function uploadUser(
   return new Promise(resolve => {
     firebase.auth().onAuthStateChanged(function(user) {
       let userData = {};
-      docRef
-        .add({
+      docRef.doc(user.uid)
+        .set({
           name,
           age,
           city,
@@ -30,7 +30,6 @@ function uploadUser(
           uid: user.uid
         })
         .then(function(docRef) {
-          console.log('Document written with ID: ', docRef.id);
           userData = {
             name,
             age,

@@ -18,7 +18,6 @@ function getListAll() {
       querySnapshot.forEach(function(doc) {
         let data = doc.data();
         dataList = [...dataList, data];
-        console.log(dataList);
       });
       return dataList;
     });

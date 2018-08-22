@@ -29,8 +29,8 @@ class SignUpCon extends Component {
 
     const { statusActions, userActions, history } = this.props;
     firebase.auth().onAuthStateChanged(function(user) {
-      docRef
-        .add({
+      docRef.doc(user.uid)
+        .set({
           uid: user.uid
         })
         .then(function() {

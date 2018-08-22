@@ -82,8 +82,8 @@ class MakeUpCon extends Component {
       const dNow = new Date();
       const dNowLit = `${dNow.getFullYear()}.${dNow.getMonth() + 1}.${dNow.getDate()}`;
       firebase.auth().onAuthStateChanged(function(user) {
-        docRef
-          .add({
+        docRef.doc(user.uid)
+          .set({
             title,
             place,
             howMany,
@@ -91,11 +91,9 @@ class MakeUpCon extends Component {
             kakao: userData.kakaoId,
             date: dateLit,
             dateNum: date._d.getTime(),
-            dateNow: dNowLit,
-            uid: user.uid
+            dateNow: dNowLit
           })
           .then(function(docRef) {
-            console.log('Document written with ID: ', docRef.id);
 
             listAllActions.listUpAll();
 

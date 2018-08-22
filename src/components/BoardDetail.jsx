@@ -20,7 +20,7 @@ const DetailContent = styled.div`
   opacity: ${props => (props.on ? '1' : '0')};
   width: 98%;
   height: 100%;
-  padding: 4rem;
+  padding: 3rem;
   transition: all 0.5s;
   border: 1px solid rgba(255,255,255,0.7);
   border-radius: 0.5rem;
@@ -45,7 +45,7 @@ const DetailP = styled.div`
   ${props => props.theme.font.para_secondary};
   color: ${props => props.theme.colors.WHITE} !important;
   margin-top: 1rem;
-  max-height: 45%;
+  max-height: 40%;
   overflow: auto;
 `;
 const DetailTitle = styled.p`
@@ -54,8 +54,8 @@ const DetailTitle = styled.p`
 `;
 const DetailAbsol = styled.div`
   position: absolute;
-  left: 4rem;
-  bottom: 4rem;
+  left: 3rem;
+  bottom: 3rem;
 `;
 const KakaoId = styled.div`
   ${props => props.theme.font.para_forth};
